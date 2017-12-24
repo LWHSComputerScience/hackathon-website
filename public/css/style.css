@@ -240,10 +240,10 @@ a.navbar-brand span {
 .page-header {
   padding-bottom: 9px;
   margin: 20px 0 20px;
-  border-bottom: 1px solid #eee;
-  border-top: 1px solid #eee;
-  border-right: 1px solid #eee;
-  border-left: 1px solid #eee;
+  border-bottom: 1px solid #ecf0f1;
+  border-top: 1px solid #ecf0f1;
+  border-right: 1px solid #ecf0f1;
+  border-left: 1px solid #ecf0f1;
   margin-top:50px;
 }
 
