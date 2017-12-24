@@ -198,7 +198,7 @@ a.navbar-brand span {
 
 .btn-primary {
   padding: 8px 20px;
-  background: #36CBD4;
+  background: #34495e;
   color: #fff;
   border:none;
   margin-top: 10px;
@@ -206,7 +206,7 @@ a.navbar-brand span {
 
 .btn-primary:hover, 
 .btn-primary:focus{
-  background: #36CBD4;
+  background: #2c3e50;
   outline: none;
   box-shadow: none;
 } 
