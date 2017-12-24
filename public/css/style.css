@@ -490,7 +490,7 @@ textarea#message{
  ================= */
 
 footer {
-  background: #fff;
+  background: #ecf0f1;
 }
 
 .inner-footer  ul li,a  {
@@ -555,7 +555,7 @@ footer {
 }
 .last-div {
 	margin-top:40px;
-    background: #0db4be;
+    background: #2c3e50;
     padding: 20px 0;
     position: relative;
 }
