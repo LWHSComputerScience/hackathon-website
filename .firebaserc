@@ -1,5 +1,6 @@
 {
   "projects": {
-    "hyphen-hacks": "hyphenhacks-dc851"
+    "hyphen-hacks": "hyphenhacks-dc851",
+    "default": "hyphenhacks-dc851"
   }
 }
