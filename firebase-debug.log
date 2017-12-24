@@ -1,0 +1,27 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /Users/samschickler/.nvm/versions/node/v5.11.1/bin/node /Users/samschickler/.nvm/versions/node/v5.11.1/bin/firebase serve
+[debug] CLI Version:  3.6.1
+[debug] Platform:     darwin
+[debug] Node Version: v5.11.1
+[debug] Time:         Sat Dec 23 2017 22:11:37 GMT-0500 (EST)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/hyphenhacks-dc851  
+ Sat Dec 23 2017 22:11:37 GMT-0500 (EST)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/hyphenhacks-dc851/tokens  
+ Sat Dec 23 2017 22:11:38 GMT-0500 (EST)
+[debug] <<< HTTP RESPONSE 200
+[info] Starting Firebase development server...
+[info] 
+[info] Project Directory: /Users/samschickler/Desktop/Programming/hackathon-website
+[debug] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/hyphenhacks-dc851  
+ Sat Dec 23 2017 22:11:38 GMT-0500 (EST)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/1007828831500/clients/_:getWebAppConfig  
+ Sat Dec 23 2017 22:11:38 GMT-0500 (EST)
+[debug] <<< HTTP RESPONSE 200
+[info] Public Directory: public
+[info] 
+[info] Server listening at: http://localhost:5000
