@@ -271,7 +271,9 @@ a.navbar-brand span {
   flex-wrap: wrap;
   padding: 0 4px;
 }
-
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
 .column {
   flex: 25%;
   max-width: 25%;
