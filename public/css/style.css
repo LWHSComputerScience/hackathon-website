@@ -279,7 +279,21 @@ a.navbar-brand span {
   max-width: 25%;
   padding: 10px 200px;
 }
-
+.carousel-caption {
+  position: absolute;
+  width: 100%;
+  height: 125px;
+  bottom: 5%;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  left:0;
+  max-width:100%
+  color: #ecf0f1;
+  text-align: center;
+  background: #ecf0f1;
+  opacity: 100%;
+}
+@media (max-width: 10000px) { specific size style }
 .column img {
   margin-top: 8px;
   vertical-align: middle;
