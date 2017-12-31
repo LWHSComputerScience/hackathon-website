@@ -273,6 +273,11 @@ a.navbar-brand span {
   max-width: 25%;
   padding: 0 100px;
 }
+.column2 {
+  flex: 25%;
+  max-width: 25%;
+  padding: 50px 100px;
+}
 
 .column img {
   margin-top: 8px;
