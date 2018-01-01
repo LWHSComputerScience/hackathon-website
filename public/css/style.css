@@ -20,7 +20,7 @@ body {
 	background-color:#ecf0f1;
 }
 
-hi,h2,h3,h4,h5,h6 {
+h1,h2,h3,h4,h5,h6 {
 	color:#333;
 	line-height:1.1em;
 }
@@ -271,6 +271,12 @@ a.navbar-brand span {
   flex-wrap: wrap;
   padding: 0 4px;
 }
+.text-row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+  padding-left: 50px;
+}
 .carousel-inner > .item > img {
     margin: 0 auto;
 }
@@ -278,6 +284,12 @@ a.navbar-brand span {
   flex: 25%;
   max-width: 25%;
   padding: 10px 200px;
+}
+
+.text-column {
+  flex: 50%;
+  max-width: 50%;
+  padding-left: 20px;
 }
 .carousel-caption {
   position: absolute;
@@ -669,5 +681,11 @@ a.scrollup{
 a.scrollup:hover{
 	opacity:1;
 	background-color:#2c3e50;
-	color:#fff;;	
+	color:#fff;
+}
+
+/* For spacing details on main page */
+.main-description{
+    width:65%;
+    margin:auto;
 }
