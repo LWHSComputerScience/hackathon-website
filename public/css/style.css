@@ -306,11 +306,11 @@ a.navbar-brand span {
   padding-top: 0px;
   padding-bottom: 0px;
   left:0;
-  max-width:100%
+  max-width:100%;
   color: #ecf0f1;
   text-align: center;
-  background: #ecf0f1;
-  opacity: 100%;
+  background: rgba(236, 240, 241,.5);
+  /*background-opacity: 50;*/
 }
 
 .blog h3,p {

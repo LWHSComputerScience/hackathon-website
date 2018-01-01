@@ -1,0 +1,41 @@
+[debug] [2018-01-01T02:04:23.459Z] ----------------------------------------------------------------------
+[debug] [2018-01-01T02:04:23.463Z] Command:       /Users/samschickler/.nvm/versions/node/v5.11.1/bin/node /Users/samschickler/.nvm/versions/node/v5.11.1/bin/firebase serve
+[debug] [2018-01-01T02:04:23.464Z] CLI Version:   3.16.0
+[debug] [2018-01-01T02:04:23.464Z] Platform:      darwin
+[debug] [2018-01-01T02:04:23.464Z] Node Version:  v5.11.1
+[debug] [2018-01-01T02:04:23.466Z] Time:          Sun Dec 31 2017 21:04:23 GMT-0500 (EST)
+[debug] [2018-01-01T02:04:23.466Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-01-01T02:04:23.486Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-01-01T02:04:23.486Z] > authorizing via signed-in user
+[debug] [2018-01-01T02:04:23.488Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-01-01T02:04:23.489Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/npqR6pMkDyaDs94RrIQad9X1eVONQjOqE-rumX1Rc9AxXOfdXbClZLxiK3dz0JiQ',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Sun Dec 31 2017 21:04:23 GMT-0500 (EST)
+[debug] [2018-01-01T02:04:23.728Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-01T02:04:23.734Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/hyphenhacks-dc851  
+  
+ Sun Dec 31 2017 21:04:23 GMT-0500 (EST)
+[debug] [2018-01-01T02:04:24.304Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-01T02:04:24.305Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/hyphenhacks-dc851/tokens  
+  
+ Sun Dec 31 2017 21:04:24 GMT-0500 (EST)
+[debug] [2018-01-01T02:04:24.728Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/samschickler/Desktop/Programming/hackathon-website'...
+[info] 
+[debug] [2018-01-01T02:04:24.735Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/hyphenhacks-dc851  
+  
+ Sun Dec 31 2017 21:04:24 GMT-0500 (EST)
+[debug] [2018-01-01T02:04:25.109Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-01T02:04:25.109Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/1007828831500/clients/_:getWebAppConfig  
+  
+ Sun Dec 31 2017 21:04:25 GMT-0500 (EST)
+[debug] [2018-01-01T02:04:25.739Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+
