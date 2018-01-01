@@ -62,26 +62,26 @@
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
-    <div class="item active" data-interval="100000">
+    <div class="item active" data-interval="10000">
       <img src="img/carousel1.jpg">
       <div class="carousel-caption">
         <h3>Hyphen Hacks</h3>
       </div>
     </div>
 
-    <div class="item">
+    <div class="item" data-interva>
       <img src="img/carousel2.jpg">
       <div class="carousel-caption">
-        <h3>Chicago</h3>
-        <p>Thank you, Chicago!</p>
+        <h3>Hyphen-Hacks</h3>
+        <p></p>
       </div>
     </div>
 
     <div class="item">
       <img src="img/carousel3.jpg">
       <div class="carousel-caption">
-        <h3>New York</h3>
-        <p>We love the Big Apple!</p>
+        <h3>Hyphen-Hacks</h3>
+        <p></p>
       </div>
     </div>
   </div>
@@ -95,6 +95,28 @@
     <span class="glyphicon glyphicon-chevron-right"></span>
     <span class="sr-only">Next</span>
   </a>
+<script>
+    var t;
+
+var start = $('#myCarousel').find('.active').attr('data-interval');
+t = setTimeout("$('#myCarousel').carousel({interval: 1000});", start-1000);
+
+$('#myCarousel').on('slid.bs.carousel', function () {   
+     clearTimeout(t);  
+     var duration = $(this).find('.active').attr('data-interval');
+
+     $('#myCarousel').carousel('pause');
+     t = setTimeout("$('#myCarousel').carousel();", duration-1000);
+})
+
+$('.carousel-control.right').on('click', function(){
+    clearTimeout(t);   
+});
+
+$('.carousel-control.left').on('click', function(){
+    clearTimeout(t);   
+});
+    </script>
 </div>
     
     
@@ -238,7 +260,7 @@
       <div class="column">
         <!--add more images here for second column-->
         <a href="http://www.thevrara.com/" target="_blank">
-          <img src="img/vrar.png" width=50%>
+          <img src="img/vrar.png" width=100%>
         </a>
       </div>
     </div>
