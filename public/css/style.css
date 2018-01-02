@@ -144,6 +144,12 @@ a.navbar-brand span {
 	
 }
 
+.text-center h4 {
+    width:70%;
+    margin:auto;
+    line-height:1.4;
+}
+
 .box {
 	text-align:center;
 }
