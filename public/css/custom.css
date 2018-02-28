@@ -1,0 +1,12 @@
+/* Bootstrap 3 doesn't have cards */
+.card {
+    box-sizing: border-box;
+    padding: 8px;
+}
+
+.card-block {
+    border: thin solid #8a8d94;
+    border-radius: 4px;
+    padding: 16px;
+    box-shadow: 0 2px 2px rgba(128, 128, 128, 0.2);
+}
