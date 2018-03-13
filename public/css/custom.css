@@ -13,3 +13,12 @@
         box-shadow: 0 2px 2px rgba(128, 128, 128, 0.2);
     }
 }
+
+/* make footer take up page width */
+footer {
+    width: 100%;
+}
+
+main.container {
+    max-width: 1300px;
+}

@@ -53,3 +53,5 @@ fabric.properties
 .idea/hackathon-website.iml
 
 .idea/modules.xml
+
+.vscode
