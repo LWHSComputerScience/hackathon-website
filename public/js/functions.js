@@ -13,7 +13,8 @@ $('#reload-slider').click(function(e){
     speed: 500
   });
 });
-
+    // only apply animations on "medium" and larger devices
+    if (window.innerWidth >= 992) {
         $(window).scroll(function(){
 		if ($(this).scrollTop() > 100) {
 			$('.scrollup').fadeIn();
@@ -26,7 +27,8 @@ $('#reload-slider').click(function(e){
 				return false;
 		});
 		
-	 wow = new WOW({}).init();
+        wow = new WOW({}).init();
+    }
      
     //Google Map
     var get_latitude = $('#google-map').data('latitude');
