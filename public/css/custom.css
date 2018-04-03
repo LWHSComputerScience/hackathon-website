@@ -35,6 +35,30 @@ footer {
     width: 100%;
 }
 
+.short .last-div {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 main.container {
     max-width: 1300px;
+}
+
+.sponsorship img {
+    padding: 16px;
+}
+
+.logo-platinum {
+    max-width: 335px;
+}
+
+.logo-gold {
+    max-width: 250px;
+}
+
+/* will add silver once we have silver sponsors */
+
+.logo-bronze {
+    max-width: 200px;
 }
