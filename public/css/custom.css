@@ -12,13 +12,12 @@
         padding: 16px;
         position: relative;
         bottom: 0;
-        transition: 250ms linear box-shadow, 250ms linear bottom;
+        transition: 250ms linear box-shadow;
         box-shadow: 0 2px 2px rgba(128, 128, 128, 0.2);
     }
 
     .card-block:hover {
-        box-shadow: 0 4px 4px rgba(128, 128, 128, 0.3);
-        bottom: 4px;
+        box-shadow: 0 4px 4px rgba(128, 128, 128, 0.5);
     }
 
     .FAQ {
