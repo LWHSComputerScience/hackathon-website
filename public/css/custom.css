@@ -59,3 +59,27 @@ main.container {
 .logo-bronze {
     max-width: 200px;
 } */
+
+#hh-logo {
+    position: relative;
+    top: 6px;
+}
+
+/* "xs" class */
+@media only screen and (max-width: 767px) {
+    #hh-logo {
+        display: none;
+    }
+
+    body {
+        font-size: 15px !important;
+    }
+
+    h1 {
+        font-size: 3em !important;
+    }
+
+    #mlh-trust-badge {
+        right: 100px !important;
+    }
+}
