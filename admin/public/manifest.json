@@ -1,6 +1,6 @@
 {
-  "name": "admin",
-  "short_name": "admin",
+  "name": "Hyphen Hacks Admin",
+  "short_name": "HH Admin",
   "icons": [
     {
       "src": "/img/icons/android-chrome-192x192.png",
