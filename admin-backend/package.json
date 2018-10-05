@@ -4,10 +4,12 @@
   "description": "Hyphen Hacks Dashboard Backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "upload": "node index.js",
+    "clear": "node clear.js"
   },
   "author": "Ronan18 <ronan@brainstormincstudio.com>",
   "license": "Apache-2.0",
+  "private": true,
   "dependencies": {
     "csv": "^4.0.0",
     "fast-csv": "^2.4.1",

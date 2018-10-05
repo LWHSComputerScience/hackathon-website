@@ -1,11 +1,14 @@
 const admin = require('firebase-admin');
 const fs = require('fs');
 const csv = require('fast-csv')
-let students = fs.createReadStream("./private/students.csv");
-//let teachers = fs.createReadStream("./private/teachers.csv");
+// PATHS TO CSVs TO UPLOAD HERE!!
+// attendees
+let students = fs.createReadStream("./private/attendees.csv");
+// volunteers
+//let teachers = fs.createReadStream("./private/volunteers.csv");
 let studentData = []
 let teacherData = []
-const serviceAccount = require("./private/hyphenhacks-dc851-firebase-adminsdk-au5a6-3d9ad5cb50.json");
+const serviceAccount = require("./private/auth.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -23,7 +26,7 @@ let studentsStream = csv()
 })
 .on("end", function(){
   console.log("done");
-  fs.writeFile("./private/students.json", JSON.stringify(studentData), function(err) {
+  fs.writeFile("./private/attendees.json", JSON.stringify(studentData), function(err) {
     if(err) {
       return console.log(err);
     }
@@ -39,11 +42,13 @@ let teacherStream = csv()
 })
 .on("end", function(){
   console.log("done");
-  fs.writeFile("./private/students.json", JSON.stringify(teacherData), function(err) {
+  fs.writeFile("./private/volunteers.json", JSON.stringify(teacherData), function(err) {
     if(err) {
       return console.log(err);
     }
     console.log("The file was saved!");
+    console.log('DB Cleared');
+    process.exit(0);
   });
 });
 
