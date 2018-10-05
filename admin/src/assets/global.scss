@@ -29,6 +29,7 @@ body, html, #app, .page {
   .nav__search {
     border: none;
     padding: 5%;
+    font-size: 0.8rem;
     @include shadow--small;
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
@@ -49,6 +50,9 @@ body, html, #app, .page {
   grid-row-start: 2;
   grid-row-end: 3;
   border-top: solid 2px $light;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .page {
