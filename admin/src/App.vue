@@ -20,13 +20,13 @@
     name: 'appContainer',
     data() {
       return {
-        totalList: {},
+        totalList: [],
         quote: ''
       }
     },
     computed: {
       filterdList() {
-        return this.totalList
+        return this.totalList[0]
       }
 
 
@@ -34,9 +34,11 @@
     mounted() {
       firebase.database().ref('/attendeeDB/attendees/').on('value', (data) => {
         console.log(data.val())
-        this.totalList = data.val()
+        this.totalList = []
+        this.totalList.push( data.val())
+
       })
-      fetch('http://api.icndb.com/jokes/random?escapse=javascript')
+      fetch('https://api.icndb.com/jokes/random?escapse=javascript')
       .then((resp) => resp.json()) // Transform the data into json
       .then((data) => {
         console.log(data)
