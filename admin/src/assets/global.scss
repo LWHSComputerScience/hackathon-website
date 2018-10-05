@@ -1,1 +1,42 @@
 @import './vars.scss';
+
+body, html, #app, .page {
+  width: 100%;
+  height: 100%;
+  font-size: 100%;
+  font-family: sans-serif;
+  color: $primary;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: 20% 1fr;
+  grid-template-rows: 1fr 8%;
+}
+
+.app__nav {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  @include shadow;
+
+  //background: red;
+}
+
+.app__footer {
+ // background: blue;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  border-top: solid 2px $light;
+}
+
+.page {
+  //background: orange;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
