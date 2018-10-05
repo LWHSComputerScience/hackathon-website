@@ -59,6 +59,9 @@ fabric.properties
 
 #Admin Dashboard stuff below:
 
+admin-backend/private/
+admin-backend/private/*
+
 .DS_Store
 node_modules
 /dist

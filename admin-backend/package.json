@@ -1,0 +1,14 @@
+{
+  "name": "admin-backend",
+  "version": "1.0.0",
+  "description": "Hyphen Hacks Dashboard Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ronan18 <ronan@brainstormincstudio.com>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "csv": "^4.0.0"
+  }
+}
