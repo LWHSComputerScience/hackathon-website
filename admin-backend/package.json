@@ -10,6 +10,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "csv": "^4.0.0",
-    "fast-csv": "^2.4.1"
+    "fast-csv": "^2.4.1",
+    "firebase-admin": "^6.0.0"
   }
 }

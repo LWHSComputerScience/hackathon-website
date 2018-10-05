@@ -1,8 +1,14 @@
-
+const admin = require('firebase-admin');
 const fs = require('fs');
 const csv = require('fast-csv')
-var stream = fs.createReadStream("./private/data.csv");
+let stream = fs.createReadStream("./private/data.csv");
 let data = []
+const serviceAccount = require("./private/hyphenhacks-dc851-firebase-adminsdk-au5a6-3d9ad5cb50.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://hyphenhacks-dc851.firebaseio.com"
+});
 var csvStream = csv()
 .on("data", function(row){
   console.log(row);
