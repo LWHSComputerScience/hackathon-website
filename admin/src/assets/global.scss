@@ -20,10 +20,11 @@ body, html, #app, .page {
   grid-row-start: 1;
   grid-row-end: 3;
   @include shadow--large;
-  padding: 4%;
- .nav__header {
+  padding: 5%;
+  .nav__header {
     font-size: 1.5rem;
     font-weight: 600;
+    width: 100%;
   }
   .nav__search {
     border: none;
@@ -32,6 +33,7 @@ body, html, #app, .page {
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
     border-radius: 100px;
+    width: 100%;
     &:focus {
       outline: none;
     }
