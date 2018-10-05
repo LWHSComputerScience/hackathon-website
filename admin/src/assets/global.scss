@@ -54,7 +54,11 @@ body, html, #app, .page {
   justify-content: center;
   align-items: center;
 }
-
+.footer__quote {
+  margin: 1%;
+  font-size: 1rem;
+  text-align: center;
+}
 .page {
   //background: orange;
   grid-column-start: 2;
