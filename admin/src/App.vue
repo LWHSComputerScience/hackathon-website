@@ -11,7 +11,27 @@
 <script>
   import 'minireset.css'
   import './assets/global.scss'
+  import firebase from 'firebase/app';
+  import 'firebase/database'
   export default {
-    name: 'appContainer'
+    name: 'appContainer',
+    data() {
+      return {
+        totalList: {}
+      }
+    },
+    computed: {
+      filterdList() {
+        return this.totalList
+      }
+
+    },
+    mounted() {
+      firebase.database().ref('/attendeeDB/attendees/').on('value', (data) => {
+        console.log(data.val())
+        this.totalList = data.val()
+      })
+    }
+
   }
 </script>

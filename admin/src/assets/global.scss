@@ -10,8 +10,8 @@ body, html, #app, .page {
 
 #app {
   display: grid;
-  grid-template-columns: 20% 1fr;
-  grid-template-rows: 1fr 8%;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: 92% 8%;
 }
 
 .app__nav {
@@ -55,6 +55,7 @@ body, html, #app, .page {
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
+  overflow-y: scroll;
 }
 
 .auth {

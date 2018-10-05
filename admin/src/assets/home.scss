@@ -1,1 +1,17 @@
 @import './vars.scss';
+
+.home {
+  padding: 2%;
+  overflow-y: scroll;
+}
+
+.person {
+  @include shadow--small;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2%;
+  border-radius: $rounding;
+  height: 6vh;
+  margin: 1% 0;
+}
