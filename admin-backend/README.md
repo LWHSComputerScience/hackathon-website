@@ -1,7 +1,7 @@
 # Ronan's Really Cool Guide to uploading stuff to the DB
 
 > "A must read! Ronan will leave you gripping the edge of your seat with excitement"
-> > -anonymous 2018
+> - *anonymous 2018*
 
 
 ### Preparing the data
