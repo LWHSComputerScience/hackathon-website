@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <nav class="app__nav"></nav>
+    <nav v-if="$route.path != '/'" class="app__nav">
+      <h1 class="nav__header">Hyphen-Hacks Dashboard</h1>
+    </nav>
     <router-view/>
-    <footer class="app__footer"></footer>
+    <footer v-if="$route.path != '/'" class="app__footer"></footer>
   </div>
 </template>
 <script>
