@@ -19,13 +19,29 @@ body, html, #app, .page {
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: 3;
-  @include shadow;
-
+  @include shadow--large;
+  padding: 4%;
+ .nav__header {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  .nav__search {
+    border: none;
+    padding: 5%;
+    @include shadow--small;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    &:focus {
+      outline: none;
+    }
+    margin-top: 5%;
+  }
   //background: red;
 }
 
 .app__footer {
- // background: blue;
+  // background: blue;
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 2;
@@ -40,6 +56,7 @@ body, html, #app, .page {
   grid-row-start: 1;
   grid-row-end: 2;
 }
+
 .auth {
   //background: indianred;
   grid-column-start: 1;

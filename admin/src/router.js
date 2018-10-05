@@ -35,7 +35,11 @@ let router = new Router({
 router.beforeEach((to, from, next) => {
   firebase.database().ref('/whitelistUIDs').once('value').then(snapshot => {
     whitelist = snapshot.val()
-    let currentUser = firebase.auth().currentUser.uid in whitelist
+    let currentUser = false
+    if (firebase.auth().currentUser) {
+      currentUser = firebase.auth().currentUser.uid in whitelist;
+    }
+
     let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
     if (requiresAuth && !currentUser) next ('/')
     else if (!requiresAuth && currentUser) next('/a')

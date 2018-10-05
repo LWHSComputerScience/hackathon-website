@@ -1,7 +1,7 @@
 $primary: #1C1C1C;
 $light: #cacaca;
 $rounding: 5px;
-@mixin shadow {
+@mixin shadow--large {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 @mixin transition {
@@ -10,4 +10,7 @@ $rounding: 5px;
   -ms-transition-duration: 0.5s;
   -o-transition-duration: 0.5s;
   transition-duration: 0.5s;
+}
+@mixin shadow--small {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
