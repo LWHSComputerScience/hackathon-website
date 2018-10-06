@@ -2,7 +2,7 @@
   <div id="app">
     <nav v-if="$route.path != '/'" class="app__nav">
       <h1 class="nav__header">Hyphen-Hacks Dashboard</h1>
-      <input class="nav__search" type="search" placeholder="search">
+      <input v-model="search" class="nav__search" type="search" placeholder="search">
     </nav>
     <router-view/>
     <footer v-if="$route.path != '/'" class="app__footer">
@@ -21,12 +21,32 @@
     data() {
       return {
         totalList: [],
-        quote: ''
+        quote: '',
+        search: ''
       }
     },
     computed: {
       filterdList() {
-        return this.totalList[0]
+        if (this.search != '') {
+          // console.log('searching')
+          let list = this.totalList[0];
+          // console.log(list)
+          let sorted = [];
+
+          let element = null;
+          for (let key in list) {
+            element = list[key];
+            if (element[3].toLowerCase().includes(this.search.toLowerCase()) || element[2].toLowerCase().includes(this.search.toLowerCase())) {
+              sorted.push(element)
+            }
+            // Do something with element i.
+          }
+
+          return sorted
+        } else {
+          return this.totalList[0]
+        }
+
       }
 
 
@@ -35,7 +55,7 @@
       firebase.database().ref('/attendeeDB/attendees/').on('value', (data) => {
         console.log(data.val())
         this.totalList = []
-        this.totalList.push( data.val())
+        this.totalList.push(data.val())
 
       })
       fetch('https://api.icndb.com/jokes/random?escapse=javascript')
