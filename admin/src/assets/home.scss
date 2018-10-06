@@ -91,32 +91,33 @@
       }
     }
   }
-}
 
-.person {
-  @include shadow--small;
-  display: flex;
-  align-items: center;
-  padding: 2%;
-  border-radius: $rounding;
-  height: 6vh;
-  margin: 1% 0;
-  @include transition;
-  &:hover {
-  background-color: #ececec;
+  .person {
+    text-decoration: none;
+    @include shadow--small;
+    display: flex;
+    align-items: center;
+    padding: 2%;
+    border-radius: $rounding;
+    height: 6vh;
+    margin: 1% 0;
+    @include transition;
+    &:hover {
+      background-color: #ececec;
+    }
   }
-}
-.person__name {
-  font-weight: 600;
-  margin-right: 0 1%;
-  width: 20%;
-}
-.person__email {
-  margin: 0 1%;
-  width: 25%;
-}
-.person__gender {
-  margin: 0 1%;
-  width: 13%;
-  //background:red;
+  .person__name {
+    font-weight: 600;
+    margin-right: 0 1%;
+    width: 20%;
+  }
+  .person__email {
+    margin: 0 1%;
+    width: 25%;
+  }
+  .person__gender {
+    margin: 0 1%;
+    width: 13%;
+    //background:red;
+  }
 }

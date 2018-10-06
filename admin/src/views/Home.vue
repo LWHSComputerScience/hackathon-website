@@ -1,23 +1,25 @@
 <template>
   <div class="home page">
-    <div :key="person.id" v-if="person.name != 'Name'" class="person" v-for="person in $parent.filterdList">
+    <div @click="open(person.id)" :key="person.id" v-if="person.name != 'Name'" class="person"
+         v-for="person in $parent.filterdList">
       <h1 class="person__name">{{person.name}}</h1>
       <p class="person__email">{{person.email}}</p>
-      <p class="person__gender">{{person.name}}</p>
-      <div class="checkboxRow waiver">
-        <input :id="person.id + 'waiver'" v-model="person[20]"  class="checkboxRow__checkbox" type="checkbox">
-        <label :for="person.id + 'waiver'"  class="checkboxRow__label">waiver completed</label>
+      <p class="person__gender">{{person.gender}}</p>
+      <div @click="preventOpen" class="checkboxRow waiver">
+        <input :id="person.id + 'waiver'" v-model="person.waiver" class="checkboxRow__checkbox" type="checkbox">
+        <label :for="person.id + 'waiver'" class="checkboxRow__label">waiver completed</label>
       </div>
-      <div class="checkboxRow">
-        <input :id="person.id + 'checkedIn'" v-model="person[21]"  class="checkboxRow__checkbox" type="checkbox">
-        <label :for="person.id + 'checkedIn'"  class="checkboxRow__label">checked in</label>
+      <div  @click="preventOpen" class="checkboxRow">
+        <input :id="person.id + 'checkedIn'" v-model="person.checkedIn" class="checkboxRow__checkbox" type="checkbox">
+        <label :for="person.id + 'checkedIn'" class="checkboxRow__label">checked in</label>
       </div>
-      <div class="checkboxRow">
-        <input :id="person.id + 'onCampus'" v-model="person[22]"  class="checkboxRow__checkbox" type="checkbox">
-        <label :for="person.id + 'onCampus'"  class="checkboxRow__label">on campus</label>
+      <div  @click="preventOpen" class="checkboxRow">
+        <input :id="person.id + 'onCampus'" v-model="person.onCampus" class="checkboxRow__checkbox" type="checkbox">
+        <label :for="person.id + 'onCampus'" class="checkboxRow__label">on campus</label>
       </div>
 
     </div>
+    <p v-if="!$parent.filterdList[0]">no results</p>
   </div>
 </template>
 
@@ -27,6 +29,25 @@
 
   export default {
     name: 'home',
+    data() {
+      return {
+        openTime: false
+      }
+    },
+    methods: {
+      preventOpen() {
+        this.openTime = true;
+        setTimeout(() => {
+          this.openTime = false
+        }, '500')
+      },
+      open(id) {
+        if (!this.openTime) {
+          this.$router.push('/p/' + id)
+        }
+      }
+
+    }
 
   }
 </script>
