@@ -14,6 +14,16 @@ body, html, #app, .page {
   grid-template-columns: 20% 80%;
   grid-template-rows: 92% 8%;
 }
+.backBtn {
+  text-decoration: none;
+  color: $primary;
+  @include transition;
+  font-weight: 600;
+  &:hover{
+    opacity: 0.5;
+
+  }
+}
 .stomprocketBranding {
   display: block;
   text-decoration: none;
