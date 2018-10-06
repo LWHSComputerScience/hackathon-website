@@ -20,7 +20,9 @@ let studentsStream = csv()
 .on("data", function(row){
   console.log(row);
   row.push('attendee')
-  row.push(false)
+  row.push(false)//waiver
+  row.push(false)//checked in
+  row.push(false)//on campus
   studentData.push(row)
   atendeesDB.push().set(row)
 
@@ -38,6 +40,8 @@ let teacherStream = csv()
 .on("data", function(row){
   console.log(row);
   row.push('volunteer')
+  row.push(false)
+  row.push(false)
   row.push(false)
   teacherData.push(row)
 
