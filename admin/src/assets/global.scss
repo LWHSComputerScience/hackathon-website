@@ -40,6 +40,7 @@ body, html, #app, .page {
     width: 100%;
   }
   .nav__search {
+    margin-bottom: 5%;
     border: none;
     padding: 5%;
     font-size: 0.8rem;
@@ -63,6 +64,112 @@ body, html, #app, .page {
     }
     margin-top: 5%;
   }
+  .checkboxRow {
+    display: flex;
+    margin: 1% 0;
+    position: relative;
+    margin: $md-checkbox-margin;
+    text-align: left;
+
+    &.md-checkbox-inline {
+      display: inline-block;
+    }
+
+    label {
+      cursor: pointer;
+      display: inline;
+      line-height: $md-checkbox-size;
+      vertical-align: top;
+      clear: both;
+      padding-left: 1px;
+      &:not(:empty) {
+        padding-left: $md-checkbox-label-padding;
+      }
+
+      &:before, &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      &:before {
+        // box
+        width: $md-checkbox-size;
+        height: $md-checkbox-size;
+        background: #fff;
+        border: $md-checkbox-border-width solid $md-checkbox-border-color;
+        border-radius: $md-checkbox-border-radius;
+        cursor: pointer;
+        transition: background .3s;
+      }
+
+      &:after {
+        // checkmark
+      }
+    }
+
+    input[type="checkbox"] {
+      outline: 0;
+      visibility: hidden;
+      width: $md-checkbox-size;
+      margin: 0;
+      display: block;
+      float: left;
+      font-size: inherit;
+
+      &:checked {
+        + label:before{
+          background: $md-checkbox-checked-color;
+          border:none;
+        }
+        + label:after {
+
+          $md-checkmark-size: $md-checkbox-size - 2 * $md-checkbox-padding;
+
+          transform: translate($md-checkbox-padding, ($md-checkbox-size / 2) - ($md-checkmark-size / 2.6)) rotate(-45deg);
+          width: $md-checkmark-size;
+          height: $md-checkmark-size / 2;
+
+          border: $md-checkmark-width solid $md-checkmark-color;
+          border-top-style: none;
+          border-right-style: none;
+        }
+      }
+
+      &:disabled {
+        + label:before{
+          border-color: $md-checkbox-border-color-disabled;
+        }
+        &:checked {
+          + label:before{
+            background: $md-checkbox-checked-color-disabled;
+          }
+        }
+      }
+    }
+  }
+  /*
+  .checkboxRow__label {
+
+  }
+  .checkboxRow__checkbox {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid rgba(0, 0, 0, 0.54);
+    border-radius: 0.125em;
+    margin-right: 1%;
+    &:focus {
+      outline: none;
+    }
+    &:checked {
+      background: $checked;
+      border: none;
+    }
+  }
+  */
+
   //background: red;
 }
 

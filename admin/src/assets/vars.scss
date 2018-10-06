@@ -1,6 +1,21 @@
 $primary: #1C1C1C;
 $light: #cacaca;
 $rounding: 5px;
+$checked: #07B18E;
+
+$md-checkbox-checked-color: #07B18E;
+$md-checkbox-border-color: rgba(0, 0, 0, 0.54);
+$md-checkbox-border-color-disabled: rgba(0, 0, 0, 0.26);
+$md-checkbox-checked-color-disabled: rgba(0, 0, 0, 0.26);
+
+$md-checkbox-margin: 1em 0;
+$md-checkbox-size: 1.25em;
+$md-checkbox-padding: .25em;
+$md-checkbox-border-width: 2px;
+$md-checkbox-border-radius: 0.125em;
+$md-checkmark-width: 0.125em;
+$md-checkmark-color: #fff;
+$md-checkbox-label-padding: .75em;
 @mixin shadow--large {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
