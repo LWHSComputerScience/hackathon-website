@@ -3,6 +3,10 @@
     <nav v-if="$route.path != '/'" class="app__nav">
       <h1 class="nav__header">Hyphen-Hacks Dashboard</h1>
       <input v-model="search" class="nav__search" type="text" placeholder="search">
+      <a class="stomprocketBranding" href="https://stomprocket.io" target="_blank">
+        <p>developed by:</p>
+        <img src="@/assets/wordmarksmall.png" alt="">
+      </a>
     </nav>
     <router-view/>
     <footer v-if="$route.path != '/'" class="app__footer">

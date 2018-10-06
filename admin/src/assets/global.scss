@@ -9,11 +9,22 @@ body, html, #app, .page {
 }
 
 #app {
+  overflow: hidden;
   display: grid;
   grid-template-columns: 20% 80%;
   grid-template-rows: 92% 8%;
 }
+.stomprocketBranding {
+  display: block;
+  text-decoration: none;
+  color: $primary;
+  margin-top: auto;
+  img {
+    margin-top: 1%;
+    width: 80%;
+  }
 
+}
 .app__nav {
   grid-column-start: 1;
   grid-column-end: 2;
@@ -21,8 +32,10 @@ body, html, #app, .page {
   grid-row-end: 3;
   @include shadow--large;
   padding: 5%;
+  display: flex;
+  flex-direction: column;
   .nav__header {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 600;
     width: 100%;
   }
@@ -34,9 +47,19 @@ body, html, #app, .page {
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
     border-radius: 100px;
-    width: 100%;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    @include transition;
     &:focus {
       outline: none;
+      width: 100%;
+      @include shadow--medium;
+    }
+    &:hover {
+      width: 100%;
+      @include shadow--medium;
     }
     margin-top: 5%;
   }
