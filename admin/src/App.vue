@@ -51,7 +51,7 @@
           for (let key in list) {
             element = list[key];
             if (element[3].toLowerCase().includes(this.search.toLowerCase()) || element[2].toLowerCase().includes(this.search.toLowerCase())) {
-              if (element[19] == 'student' && this.includeAttendees || element[19] == 'teacher' && this.includeVoulenteers) {
+              if (element[19] == 'attendee' && this.includeAttendees || element[19] == 'volunteer' && this.includeVoulenteers) {
                 sorted.push(element)
               }
 
@@ -69,7 +69,7 @@
           for (let key in list) {
             element = list[key];
 
-            if (element[19] == 'student' && this.includeAttendees || element[19] == 'teacher' && this.includeVoulenteers) {
+            if (element[19] == 'attendee' && this.includeAttendees || element[19] == 'volunteer' && this.includeVoulenteers) {
               sorted.push(element)
             }
 

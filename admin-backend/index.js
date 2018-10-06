@@ -19,7 +19,8 @@ let atendeesDB = db.ref("/attendeeDB/attendees");
 let studentsStream = csv()
 .on("data", function(row){
   console.log(row);
-  row.push('student')
+  row.push('attendee')
+  row.push(false)
   studentData.push(row)
   atendeesDB.push().set(row)
 
@@ -36,7 +37,8 @@ let studentsStream = csv()
 let teacherStream = csv()
 .on("data", function(row){
   console.log(row);
-  row.push('student')
+  row.push('volunteer')
+  row.push(false)
   teacherData.push(row)
 
 })
