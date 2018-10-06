@@ -43,8 +43,12 @@ let studentsStream = csv()
     onCampus: false,
     id: id
   }
-  db.ref(baseURL + id).set(person)
-  studentData[id] = person;
+  if (person.name !== "Name") {
+    db.ref(baseURL + id).set(person)
+    studentData[id] = person;
+  }
+
+
 
 
 })

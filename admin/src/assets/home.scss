@@ -93,6 +93,7 @@
   }
 
   .person {
+    cursor: pointer;
     text-decoration: none;
     @include shadow--small;
     display: flex;
