@@ -41,55 +41,65 @@
       }
     },
     computed: {
-      filterdList() {
-        let list = this.totalList;
-        if (this.search != '') {
-          // console.log('searching')
 
-          // console.log(list)
-          let sorted = [];
+      filterdList: {
+        get() {
+          let list = this.totalList;
+          if (this.search != '') {
+            // console.log('searching')
 
-          let element = null;
-          for (let key in list) {
-            element = list[key];
-            if (element.name.toLowerCase().includes(this.search.toLowerCase()) || element.email.toLowerCase().includes(this.search.toLowerCase())) {
+            // console.log(list)
+            let sorted = [];
+
+            let element = null;
+            for (let key in list) {
+              element = list[key];
+              if (element.name.toLowerCase().includes(this.search.toLowerCase()) || element.email.toLowerCase().includes(this.search.toLowerCase())) {
+                if (element.role == 'attendee' && this.includeAttendees || element.role == 'volunteer' && this.includeVoulenteers) {
+                  sorted.push(element)
+                }
+
+              }
+              // Do something with element i.
+            }
+
+            return sorted
+          } else {
+
+            // console.log(list)
+            let sorted = [];
+
+            let element = null;
+            for (let key in list) {
+              element = list[key];
+
               if (element.role == 'attendee' && this.includeAttendees || element.role == 'volunteer' && this.includeVoulenteers) {
                 sorted.push(element)
               }
 
-            }
-            // Do something with element i.
-          }
 
-          return sorted
-        } else {
-
-          // console.log(list)
-          let sorted = [];
-
-          let element = null;
-          for (let key in list) {
-            element = list[key];
-
-            if (element.role == 'attendee' && this.includeAttendees || element.role == 'volunteer' && this.includeVoulenteers) {
-              sorted.push(element)
+              // Do something with element i.
             }
 
-
-            // Do something with element i.
+            return sorted
           }
-
-          return sorted
+        },
+        set(newval) {
+          console.log('setting sort', newval)
         }
+
 
       }
 
 
     },
     mounted() {
+
       firebase.database().ref('/attendeeDB/people/').on('value', (data) => {
         //console.log(data.val())
+        console.log(' db load')
         this.totalList = {}
+
         this.totalList = data.val()
 
       })

@@ -6,16 +6,16 @@
       <p class="person__email">{{person.email}}</p>
       <p class="person__gender">{{person.gender}}</p>
       <div @click="preventOpen" class="checkboxRow waiver">
-        <input :id="person.id + 'waiver'" v-model="person.waiver" class="checkboxRow__checkbox" type="checkbox">
-        <label :for="person.id + 'waiver'" class="checkboxRow__label">waiver completed</label>
+        <input disabled :id="person.id + 'waiver'" v-model="person.waiverComplete" class="checkboxRow__checkbox" type="checkbox">
+        <label @click="update(person,'waiverComplete')" :for="person.id + 'waiver'" class="checkboxRow__label">waiver completed</label>
       </div>
-      <div  @click="preventOpen" class="checkboxRow">
-        <input :id="person.id + 'checkedIn'" v-model="person.checkedIn" class="checkboxRow__checkbox" type="checkbox">
-        <label :for="person.id + 'checkedIn'" class="checkboxRow__label">checked in</label>
+      <div @click="preventOpen" class="checkboxRow">
+        <input disabled :id="person.id + 'checkedIn'" v-model="person.checkedIn" class="checkboxRow__checkbox" type="checkbox">
+        <label @click="update(person,'checkedIn')" :for="person.id + 'checkedIn'" class="checkboxRow__label">checked in</label>
       </div>
-      <div  @click="preventOpen" class="checkboxRow">
-        <input :id="person.id + 'onCampus'" v-model="person.onCampus" class="checkboxRow__checkbox" type="checkbox">
-        <label :for="person.id + 'onCampus'" class="checkboxRow__label">on campus</label>
+      <div @click="preventOpen" class="checkboxRow">
+        <input disabled :id="person.id + 'onCampus'" v-model="person.onCampus" class="checkboxRow__checkbox" type="checkbox">
+        <label @click="update(person,'onCampus')" :for="person.id + 'onCampus'" class="checkboxRow__label">on campus</label>
       </div>
 
     </div>
@@ -26,6 +26,8 @@
 <script>
   // @ is an alias to /src
   import '@/assets/home.scss'
+  import firebase from 'firebase/app'
+  import 'firebase/database'
 
   export default {
     name: 'home',
@@ -35,6 +37,16 @@
       }
     },
     methods: {
+      update(person, record) {
+        if (person[record]) {
+          person[record] = false
+        } else {
+          person[record] = true
+        }
+
+        firebase.database().ref('attendeeDB/people/' + person.id).set(person)
+
+      },
       preventOpen() {
         this.openTime = true;
         setTimeout(() => {
