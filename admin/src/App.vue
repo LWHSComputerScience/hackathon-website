@@ -1,7 +1,7 @@
 <template>
   <div @keydown="focusSearch" id="app">
     <nav v-if="$route.path != '/'" class="app__nav">
-      <h1 class="nav__header">Hyphen-Hacks Dashboard</h1>
+      <h1 @click="searchHome" class="nav__header">Hyphen-Hacks Dashboard</h1>
       <input autocomplete="off" id="search" @keypress="searchHome" @keypress.enter="enter" v-model="search"
              class="nav__search" type="text" placeholder="search">
       <div class="checkboxRow">
@@ -10,7 +10,7 @@
       </div>
       <div class="checkboxRow">
         <input v-model="includeVoulenteers" id="voulenteers" class="checkboxRow__checkbox" type="checkbox">
-        <label for="voulenteers" class="checkboxRow__label">Voulenteers</label>
+        <label for="voulenteers" class="checkboxRow__label">Volunteers</label>
       </div>
       <a class="stomprocketBranding" href="https://stomprocket.io" target="_blank">
         <p>developed by:</p>
