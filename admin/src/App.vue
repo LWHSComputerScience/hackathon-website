@@ -32,7 +32,7 @@
     name: 'appContainer',
     data() {
       return {
-        totalList: [],
+        totalList: {},
         quote: '',
         search: '',
         includeAttendees: true,
@@ -41,17 +41,18 @@
     },
     computed: {
       filterdList() {
+        let list = this.totalList;
         if (this.search != '') {
           // console.log('searching')
-          let list = this.totalList[0];
+
           // console.log(list)
           let sorted = [];
 
           let element = null;
           for (let key in list) {
             element = list[key];
-            if (element[3].toLowerCase().includes(this.search.toLowerCase()) || element[2].toLowerCase().includes(this.search.toLowerCase())) {
-              if (element[19] == 'attendee' && this.includeAttendees || element[19] == 'volunteer' && this.includeVoulenteers) {
+            if (element.name.toLowerCase().includes(this.search.toLowerCase()) || element.email.toLowerCase().includes(this.search.toLowerCase())) {
+              if (element.role == 'attendee' && this.includeAttendees || element.role == 'volunteer' && this.includeVoulenteers) {
                 sorted.push(element)
               }
 
@@ -61,7 +62,7 @@
 
           return sorted
         } else {
-          let list = this.totalList[0];
+
           // console.log(list)
           let sorted = [];
 
@@ -69,7 +70,7 @@
           for (let key in list) {
             element = list[key];
 
-            if (element[19] == 'attendee' && this.includeAttendees || element[19] == 'volunteer' && this.includeVoulenteers) {
+            if (element.role == 'attendee' && this.includeAttendees || element.role == 'volunteer' && this.includeVoulenteers) {
               sorted.push(element)
             }
 
@@ -85,10 +86,10 @@
 
     },
     mounted() {
-      firebase.database().ref('/attendeeDB/attendees/').on('value', (data) => {
+      firebase.database().ref('/attendeeDB/people/').on('value', (data) => {
         console.log(data.val())
-        this.totalList = []
-        this.totalList.push(data.val())
+        this.totalList = {}
+        this.totalList = data.val()
 
       })
       fetch('https://api.icndb.com/jokes/random?escapse=javascript')

@@ -13,6 +13,7 @@
   "dependencies": {
     "csv": "^4.0.0",
     "fast-csv": "^2.4.1",
-    "firebase-admin": "^6.0.0"
+    "firebase-admin": "^6.0.0",
+    "uuid": "^3.3.2"
   }
 }
