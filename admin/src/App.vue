@@ -2,7 +2,7 @@
   <div id="app">
     <nav v-if="$route.path != '/'" class="app__nav">
       <h1 class="nav__header">Hyphen-Hacks Dashboard</h1>
-      <input v-model="search" class="nav__search" type="search" placeholder="search">
+      <input v-model="search" class="nav__search" type="text" placeholder="search">
     </nav>
     <router-view/>
     <footer v-if="$route.path != '/'" class="app__footer">
