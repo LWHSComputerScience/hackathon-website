@@ -36,6 +36,34 @@ body, html, #app, .page {
   }
 
 }
+.sortSelect {
+  margin-top: 5%;
+}
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  background: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  border-bottom: 1px solid $primary;
+  padding: 2%;
+  font-size: 0.9rem;
+  color: $primary;
+  @include transition;
+  &:hover {
+    border-bottom-color: $checked;
+    font-size: 1rem;
+  }
+  &:focus {
+    outline: none;
+    border-bottom-color: $checked;
+    font-size: 1rem;
+  }
+  
+}
 .app__nav {
   grid-column-start: 1;
   grid-column-end: 2;

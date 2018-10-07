@@ -70,8 +70,9 @@ let teacherStream = csv()
   }
   console.log(id)
   let person = {
-    last: row[0],
+    name: row[1] + ' ' + row[0],
     first: row[1],
+    last: row[0],
     relationship: row[2],
     email: row[3],
     phone: row[4],

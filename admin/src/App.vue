@@ -12,6 +12,16 @@
         <input v-model="includeVoulenteers" id="voulenteers" class="checkboxRow__checkbox" type="checkbox">
         <label for="voulenteers" class="checkboxRow__label">Volunteers</label>
       </div>
+      <select v-model="sortOption" class="select sortSelect">
+        <option value="name">Sort by name</option>
+        <option value="waiver">Sort by waiver status</option>
+        <option value="onCampus">Sort by on campus</option>
+        <option value="checkedIn">Sort by checked in</option>
+      </select>
+      <div class="checkboxRow">
+        <input v-model="invert" id="invert" class="checkboxRow__checkbox" type="checkbox">
+        <label for="invert" class="checkboxRow__label">Invert sort</label>
+      </div>
       <a class="stomprocketBranding" href="https://stomprocket.io" target="_blank">
         <p>developed by:</p>
         <img src="@/assets/wordmarksmall.png" alt="">
@@ -37,55 +47,109 @@
         quote: '',
         search: '',
         includeAttendees: true,
-        includeVoulenteers: true
+        includeVoulenteers: true,
+        sortOption: 'name',
+        invert: false
       }
     },
     computed: {
+      sortedList() {
+        if (!this.invert) {
+          if (this.sortOption == 'name') {
+            return this.filterdList.sort((a, b) => {
+              if(a.name < b.name) return -1;
+              if(a.name > b.name) return 1;
+              return 0;
+            })
+          } else if (this.sortOption == 'waiver') {
+            return this.filterdList.sort((a, b) => {
+              if(a.waiverComplete < b.waiverComplete) return -1;
+              if(a.waiverComplete > b.waiverComplete) return 1;
+              return 0;
+            })
+          } else if (this.sortOption == 'onCampus') {
+            return this.filterdList.sort((a, b) => {
+              if(a.onCampus < b.onCampus) return -1;
+              if(a.onCampus > b.onCampus) return 1;
+              return 0;
+            })
+          } else if (this.sortOption == 'checkedIn') {
+            return this.filterdList.sort((a, b) => {
+              if(a.checkedIn < b.checkedIn) return -1;
+              if(a.checkedIn > b.checkedIn) return 1;
+              return 0;
+            })
+          }
+        } else {
+          if (this.sortOption == 'name') {
+            return this.filterdList.sort((a, b) => {
+              if(a.name > b.name) return -1;
+              if(a.name < b.name) return 1;
+              return 0;
+            })
+          } else if (this.sortOption == 'waiver') {
+            return this.filterdList.sort((a, b) => {
+              if(a.waiverComplete > b.waiverComplete) return -1;
+              if(a.waiverComplete < b.waiverComplete) return 1;
+              return 0;
+            })
+          } else if (this.sortOption == 'onCampus') {
+            return this.filterdList.sort((a, b) => {
+              if(a.onCampus > b.onCampus) return -1;
+              if(a.onCampus < b.onCampus) return 1;
+              return 0;
+            })
+          } else if (this.sortOption == 'checkedIn') {
+            return this.filterdList.sort((a, b) => {
+              if(a.checkedIn > b.checkedIn) return -1;
+              if(a.checkedIn < b.checkedIn) return 1;
+              return 0;
+            })
+          }
+        }
 
-      filterdList: {
-        get() {
-          let list = this.totalList;
-          if (this.search != '') {
-            // console.log('searching')
 
-            // console.log(list)
-            let sorted = [];
+      },
+      filterdList() {
 
-            let element = null;
-            for (let key in list) {
-              element = list[key];
-              if (element.name.toLowerCase().includes(this.search.toLowerCase()) || element.email.toLowerCase().includes(this.search.toLowerCase())) {
-                if (element.role == 'attendee' && this.includeAttendees || element.role == 'volunteer' && this.includeVoulenteers) {
-                  sorted.push(element)
-                }
+        let list = this.totalList;
+        if (this.search != '') {
+          // console.log('searching')
 
-              }
-              // Do something with element i.
-            }
+          // console.log(list)
+          let sorted = [];
 
-            return sorted
-          } else {
-
-            // console.log(list)
-            let sorted = [];
-
-            let element = null;
-            for (let key in list) {
-              element = list[key];
-
+          let element = null;
+          for (let key in list) {
+            element = list[key];
+            if (element.name.toLowerCase().includes(this.search.toLowerCase()) || element.email.toLowerCase().includes(this.search.toLowerCase())) {
               if (element.role == 'attendee' && this.includeAttendees || element.role == 'volunteer' && this.includeVoulenteers) {
                 sorted.push(element)
               }
 
+            }
+            // Do something with element i.
+          }
 
-              // Do something with element i.
+          return sorted
+        } else {
+
+          // console.log(list)
+          let sorted = [];
+
+          let element = null;
+          for (let key in list) {
+            element = list[key];
+
+            if (element.role == 'attendee' && this.includeAttendees || element.role == 'volunteer' && this.includeVoulenteers) {
+              sorted.push(element)
             }
 
-            return sorted
+
+            // Do something with element i.
           }
-        },
-        set(newval) {
-          console.log('setting sort', newval)
+
+          return sorted
         }
 
 
@@ -95,7 +159,7 @@
     },
     mounted() {
 
-      firebase.database().ref('/attendeeDB/people/').on('value', (data) => {
+      firebase.database().ref('/attendeeDB/people/').orderByChild('name').on('value', (data) => {
         //console.log(data.val())
         console.log(' db load')
         this.totalList = {}

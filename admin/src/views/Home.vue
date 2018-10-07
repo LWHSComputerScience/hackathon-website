@@ -1,6 +1,6 @@
 <template>
   <div class="home page">
-    <div  v-for="person in $parent.filterdList"  :key="person.id" v-if="person.name != 'Name'">
+    <div  v-for="person in $parent.sortedList"  :key="person.id" v-if="person.name != 'Name'">
       <div v-if="person.role == 'attendee'" @click="open(person.id)"  class="person" >
         <h1 class="person__name">{{person.name}}</h1>
         <p class="person__email">{{person.email}}</p>
@@ -22,7 +22,7 @@
       <div v-if="person.role == 'volunteer'" @click="open(person.id)"  class="person" >
         <h1 class="person__name">{{person.first}} {{person.last}}</h1>
         <p class="person__email">{{person.email}}</p>
-        <p class="person__gender">{{person.gender}}</p>
+        <p class="person__gender">volunteer</p>
         <div @click="preventOpen" class="checkboxRow waiver">
           <input disabled :id="person.id + 'waiver'" v-model="person.waiverComplete" class="checkboxRow__checkbox" type="checkbox">
           <label @click="update(person,'waiverComplete')" :for="person.id + 'waiver'" class="checkboxRow__label">waiver completed</label>
