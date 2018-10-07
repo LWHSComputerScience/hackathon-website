@@ -49,7 +49,8 @@
         includeAttendees: true,
         includeVoulenteers: true,
         sortOption: 'name',
-        invert: false
+        invert: false,
+        catchText: true
       }
     },
     computed: {
@@ -57,52 +58,52 @@
         if (!this.invert) {
           if (this.sortOption == 'name') {
             return this.filterdList.sort((a, b) => {
-              if(a.name < b.name) return -1;
-              if(a.name > b.name) return 1;
+              if (a.name < b.name) return -1;
+              if (a.name > b.name) return 1;
               return 0;
             })
           } else if (this.sortOption == 'waiver') {
             return this.filterdList.sort((a, b) => {
-              if(a.waiverComplete < b.waiverComplete) return -1;
-              if(a.waiverComplete > b.waiverComplete) return 1;
+              if (a.waiverComplete < b.waiverComplete) return -1;
+              if (a.waiverComplete > b.waiverComplete) return 1;
               return 0;
             })
           } else if (this.sortOption == 'onCampus') {
             return this.filterdList.sort((a, b) => {
-              if(a.onCampus < b.onCampus) return -1;
-              if(a.onCampus > b.onCampus) return 1;
+              if (a.onCampus < b.onCampus) return -1;
+              if (a.onCampus > b.onCampus) return 1;
               return 0;
             })
           } else if (this.sortOption == 'checkedIn') {
             return this.filterdList.sort((a, b) => {
-              if(a.checkedIn < b.checkedIn) return -1;
-              if(a.checkedIn > b.checkedIn) return 1;
+              if (a.checkedIn < b.checkedIn) return -1;
+              if (a.checkedIn > b.checkedIn) return 1;
               return 0;
             })
           }
         } else {
           if (this.sortOption == 'name') {
             return this.filterdList.sort((a, b) => {
-              if(a.name > b.name) return -1;
-              if(a.name < b.name) return 1;
+              if (a.name > b.name) return -1;
+              if (a.name < b.name) return 1;
               return 0;
             })
           } else if (this.sortOption == 'waiver') {
             return this.filterdList.sort((a, b) => {
-              if(a.waiverComplete > b.waiverComplete) return -1;
-              if(a.waiverComplete < b.waiverComplete) return 1;
+              if (a.waiverComplete > b.waiverComplete) return -1;
+              if (a.waiverComplete < b.waiverComplete) return 1;
               return 0;
             })
           } else if (this.sortOption == 'onCampus') {
             return this.filterdList.sort((a, b) => {
-              if(a.onCampus > b.onCampus) return -1;
-              if(a.onCampus < b.onCampus) return 1;
+              if (a.onCampus > b.onCampus) return -1;
+              if (a.onCampus < b.onCampus) return 1;
               return 0;
             })
           } else if (this.sortOption == 'checkedIn') {
             return this.filterdList.sort((a, b) => {
-              if(a.checkedIn > b.checkedIn) return -1;
-              if(a.checkedIn < b.checkedIn) return 1;
+              if (a.checkedIn > b.checkedIn) return -1;
+              if (a.checkedIn < b.checkedIn) return 1;
               return 0;
             })
           }
@@ -169,11 +170,13 @@
       })
       this.refreshJoke()
       window.onkeypress = (e) => {
-        if (e.key == 'Enter' && this.$route.path != '/a/') {
+        if (this.catchText) {
+          if (e.key == 'Enter' && this.$route.path != '/a/') {
 
-          this.$router.push('/a/')
+            this.$router.push('/a/')
+          }
+          this.focusSearch();
         }
-        this.focusSearch();
 
       }
     },
@@ -189,22 +192,29 @@
       },
       focusSearch() {
         // console.log('focusSearch');
-        document.getElementById("search").focus()
+        if (this.catchText) {
+          document.getElementById("search").focus()
+        }
+
       },
       searchHome() {
-        if (this.$route.path !== '/a/') {
-          //console.log('re')
-          this.$router.push('/a/')
+        if (this.catchText) {
+          if (this.$route.path !== '/a/') {
+            //console.log('re')
+            this.$router.push('/a/')
+          }
         }
 
 
       },
       enter() {
-        if (this.$route.path === '/a/' && Object.keys(this.filterdList)[0]) {
-          let id = this.filterdList[Object.keys(this.filterdList)[0]].id;
-          this.$router.push('/p/' + id)
-          this.search = '';
-          document.getElementById("search").blur()
+        if (this.catchText) {
+          if (this.$route.path === '/a/' && Object.keys(this.filterdList)[0]) {
+            let id = this.filterdList[Object.keys(this.filterdList)[0]].id;
+            this.$router.push('/p/' + id)
+            this.search = '';
+            document.getElementById("search").blur()
+          }
         }
       }
 

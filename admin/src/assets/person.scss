@@ -46,7 +46,11 @@
     &.md-checkbox-inline {
       display: inline-block;
     }
-
+    .checkbox__auth {
+      font-style: italic;
+      font-weight: 300;
+      font-size: 0.8rem;
+    }
     label {
       cursor: pointer;
       display: inline;
@@ -91,9 +95,9 @@
       font-size: inherit;
 
       &:checked {
-        + label:before{
+        + label:before {
           background: $md-checkbox-checked-color;
-          border:none;
+          border: none;
         }
         + label:after {
 

@@ -22,7 +22,7 @@
           <input :id="person.id + 'waiver'" v-model="person.waiverComplete" class="checkboxRow__checkbox"
                  type="checkbox">
           <label @click="update(person,'waiverComplete')" :for="person.id + 'waiver'"
-                 class="checkboxRow__label"></label>
+                 class="checkboxRow__label"><span v-if="person.waiverComplete" class="checkbox__auth">({{person.authorizer}})</span></label>
         </div>
       </div>
       <div class="checkboxRow">
@@ -49,6 +49,7 @@
   import '@/assets/person.scss'
   import firebase from 'firebase/app'
   import 'firebase/auth'
+  import swal from 'sweetalert';
 
   export default {
     name: 'person',
@@ -73,15 +74,55 @@
     },
     methods: {
       update(person, record) {
-        if (person[record]) {
-          person[record] = false
+        if (record === 'waiverComplete') {
+          if (person[record]) {
+            this.$parent.catchText = false
+            swal({
+              title: "Are you sure?",
+              text: "You are unchecking the waiver box",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+                person[record] = false
+                person.authorizer = '';
+                firebase.database().ref('attendeeDB/people/' + person.id).set(person)
+                this.$parent.catchText = true
+              } else {
+                this.$parent.catchText = true
+              }
+
+            });
+          } else {
+            this.$parent.catchText = false
+            swal("Please wright your initials:", {
+              content: "input",
+            })
+            .then((value) => {
+              if (value && value != ' ') {
+                person[record] = true;
+                person.authorizer = value;
+                firebase.database().ref('attendeeDB/people/' + person.id).set(person)
+                this.$parent.catchText = true
+              } else {
+                swal("Please enter initials", "Initials are required to authorize a waiver", "error")
+                this.$parent.catchText = true
+              }
+
+
+            });
+
+          }
+
         } else {
-          person[record] = true
+          person[record] = !person[record];
+          firebase.database().ref('attendeeDB/people/' + person.id).set(person)
+
         }
 
-        firebase.database().ref('attendeeDB/people/' + person.id).set(person)
-
-      }
+      },
 
     }
 
