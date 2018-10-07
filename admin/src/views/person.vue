@@ -1,20 +1,21 @@
 <template>
   <div class="person page">
     <router-link class="backBtn" to="/a/">back</router-link>
-    <h1 class="person__name">{{person.name}} <span>({{person.role}})</span></h1>
+    <h1 v-if="person.role == 'attendee'" class="person__name">{{person.name}} <span>({{person.role}})</span></h1>
+    <h1 v-if="person.role == 'volunteer'" class="person__name">{{person.first}} {{person.last}} <span>({{person.role}})</span></h1>
     <h2 class="person__school">{{person.school}} {{person.graduationYear}}</h2>
     <div class="info">
       <p>Email: <b>{{person.email}}</b></p>
       <p>Phone: <b>{{person.phone}}</b></p>
-      <p>Date Of Birth: <b>{{person.DOB}}</b></p>
-      <p>Gender: <b>{{person.gender}}</b></p>
-      <p>Race/Ethnicity: <b>{{person.race}}</b></p>
-      <p>Dietary Restrictions: <b>{{person.dietaryRestrictions}}</b></p>
-      <p>Special Needs: <b>{{person.specialNeeds}}</b></p>
-      <p>Level Of Study: <b>{{person.levelOfStudy}}</b></p>
-      <p>Shirt Size: <b>{{person.shirtSize}}</b></p>
-      <p>Interested Major: <b>{{person.interestedMajor}}</b></p>
-      <p>Computer Science History: <b>{{person.compsciHistory}}</b></p>
+      <p v-if="person.role == 'attendee'" >Date Of Birth: <b>{{person.DOB}}</b></p>
+      <p v-if="person.role == 'attendee'">Gender: <b>{{person.gender}}</b></p>
+      <p v-if="person.role == 'attendee'">Race/Ethnicity: <b>{{person.race}}</b></p>
+      <p v-if="person.role == 'attendee'">Dietary Restrictions: <b>{{person.dietaryRestrictions}}</b></p>
+      <p v-if="person.role == 'attendee'">Special Needs: <b>{{person.specialNeeds}}</b></p>
+      <p v-if="person.role == 'attendee'">Level Of Study: <b>{{person.levelOfStudy}}</b></p>
+      <p v-if="person.role == 'attendee'">Shirt Size: <b>{{person.shirtSize}}</b></p>
+      <p v-if="person.role == 'attendee'">Interested Major: <b>{{person.interestedMajor}}</b></p>
+      <p v-if="person.role == 'attendee'">Computer Science History: <b>{{person.compsciHistory}}</b></p>
       <div class="checkboxRow">
         <p>Waiver Complete</p>
         <div class="checkbox">
