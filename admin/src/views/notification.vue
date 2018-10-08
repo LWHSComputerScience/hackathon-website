@@ -59,7 +59,7 @@
             this.initials = ''
             this.message = ''
             this.title = ''
-            firebase.database.ref('/notificationLog/').push().set({
+            firebase.database.ref('notificationLog/').push().set({
               initials: initials,
               data: data
             })

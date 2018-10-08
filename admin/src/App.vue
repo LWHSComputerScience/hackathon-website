@@ -22,7 +22,7 @@
         <input v-model="invert" id="invert" class="checkboxRow__checkbox" type="checkbox">
         <label for="invert" class="checkboxRow__label">Invert sort</label>
       </div>
- 
+
       <router-link class="btn nav__notification" to="/n">Send a notification</router-link>
       <a class="stomprocketBranding" href="https://stomprocket.io" target="_blank">
         <p>developed by:</p>
