@@ -172,7 +172,7 @@
       })
       this.refreshJoke()
       window.onkeypress = (e) => {
-        if (this.catchText || document.activeElement == document.getElementById('search')) {
+        if (this.catchText || document.activeElement == document.getElementById('search') || document.activeElement == document.body) {
           if (e.key == 'Enter' && this.$route.path != '/a/') {
 
             this.$router.push('/a/')
