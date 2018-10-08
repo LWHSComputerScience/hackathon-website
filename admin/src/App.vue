@@ -24,6 +24,12 @@
       </div>
 
       <router-link class="btn nav__notification" to="/n">Send a notification</router-link>
+      <div class="alert" v-if="version < newestVersion">
+        <h1 class="alert__heading">New Version Available!! {{newestVersion}}</h1>
+        <p class="alert__text">Please empty your application cache and reload to get the latest version of the dashboard.</p>
+        <p class="alert__version">Current Version: {{version}}</p>
+        <p class="alert__version new">Newest Version: {{newestVersion}}</p>
+      </div>
       <a class="stomprocketBranding" href="https://stomprocket.io" target="_blank">
         <p>developed by:</p>
         <img src="@/assets/wordmarksmall.png" alt="">
@@ -52,7 +58,9 @@
         includeVoulenteers: true,
         sortOption: 'name',
         invert: false,
-        catchText: true
+        catchText: true,
+        version: require('../package.json').version,
+        newestVersion: null
       }
     },
     computed: {
@@ -170,6 +178,15 @@
         this.totalList = data.val()
 
       })
+      firebase.database().ref('adminVersion').on('value', (data) => {
+        //console.log(data.val())
+        console.log('newest version', data.val())
+        if (data.val() > this.version) {
+          console.log('outdated')
+
+        }
+        this.newestVersion = data.val()
+      });
       this.refreshJoke()
       window.onkeypress = (e) => {
         if (this.catchText || document.activeElement == document.getElementById('search') || document.activeElement == document.body) {

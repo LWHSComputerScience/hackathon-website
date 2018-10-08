@@ -95,6 +95,33 @@ body, html, #app, .page {
   }
   
 }
+.alert {
+  padding: 2%;
+  margin: 10% 0;
+  -webkit-border-radius: $rounding;
+  -moz-border-radius: $rounding;
+  border-radius: $rounding;
+  @include shadow--small;
+}
+.alert__heading {
+  color: $alert;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 1%;
+}
+.alert__text {
+  font-weight: 300;
+  font-size: 0.9rem;
+}
+.alert__version {
+  margin-top: 1%;
+  font-weight: 300;
+  font-size: 0.9rem;
+}
+.alert__version.new {
+  color: $alert;
+}
+
 .app__nav {
   grid-column-start: 1;
   grid-column-end: 2;
