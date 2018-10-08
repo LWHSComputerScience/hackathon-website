@@ -22,6 +22,8 @@
         <input v-model="invert" id="invert" class="checkboxRow__checkbox" type="checkbox">
         <label for="invert" class="checkboxRow__label">Invert sort</label>
       </div>
+ 
+      <router-link class="btn nav__notification" to="/n">Send a notification</router-link>
       <a class="stomprocketBranding" href="https://stomprocket.io" target="_blank">
         <p>developed by:</p>
         <img src="@/assets/wordmarksmall.png" alt="">
@@ -170,7 +172,7 @@
       })
       this.refreshJoke()
       window.onkeypress = (e) => {
-        if (this.catchText) {
+        if (this.catchText || document.activeElement == document.getElementById('search')) {
           if (e.key == 'Enter' && this.$route.path != '/a/') {
 
             this.$router.push('/a/')

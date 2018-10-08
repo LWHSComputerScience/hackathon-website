@@ -25,6 +25,37 @@ body, html, #app, .page {
 
   }
 }
+.nav__notification {
+  margin-top: 10%;
+}
+.btn {
+  //padding: 2%;
+
+  background: none;
+  border: none;
+  text-decoration: none;
+  -webkit-border-radius: $rounding;
+  -moz-border-radius: $rounding;
+  border-radius: $rounding;
+  background-color: $checked;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  min-width: 5vw;
+  height: 3vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include transition;
+  @include shadow--small;
+  &:hover {
+   // @include shadow--medium;
+    background-color: rgba($checked, 0.8);
+  }
+  &:focus {
+    outline: none;
+  }
+}
 .stomprocketBranding {
   display: block;
   text-decoration: none;
@@ -73,6 +104,9 @@ body, html, #app, .page {
   padding: 5%;
   display: flex;
   flex-direction: column;
+  hr {
+    margin-top: 5%;
+  }
   .nav__header {
     font-size: 2rem;
     font-weight: 600;

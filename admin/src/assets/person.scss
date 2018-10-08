@@ -1,5 +1,49 @@
 @import './vars.scss';
+.notificationTitle {
+  font-weight: 600;
+  font-size: 2.5rem;
+  margin-top: 3%;
+  text-align: center;
+}
+.notifications__container {
+  @include shadow--small;
+  min-height: 70%;
+  padding: 1%;
+  margin-top: 2%;
+  -webkit-border-radius: $rounding;
+  -moz-border-radius: $rounding;
+  border-radius: $rounding;
 
+}
+.notification__form {
+  padding-top: 5%;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .input {
+    margin-top: 1%;
+    padding: 1%;
+    font-size: 0.8rem;
+    width: 50%;
+    border: none;
+    background: none;
+    margin-bottom: 1%;
+    border-bottom: 1px $primary solid;
+    @include transition;
+    &:hover{
+      border-bottom: $checked solid 1.2px;
+      width: 52%;
+    }
+    &:focus {
+      outline: none;
+      border-bottom: $checked solid 1.2px;
+      width: 52%;
+    }
+  }
+}
 .person.page {
   padding: 2%;
   .person__name {

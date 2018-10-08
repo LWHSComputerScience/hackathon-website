@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import auth from './views/auth.vue'
 import Person from './views/person.vue'
+import notification from './views/notification.vue'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
@@ -18,6 +19,14 @@ let router = new Router({
       path: '/a',
       name: 'app',
       component: Home,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/n',
+      name: 'notification',
+      component: notification,
       meta: {
         requiresAuth: true
       }
