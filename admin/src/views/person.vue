@@ -97,7 +97,7 @@
             });
           } else {
             this.$parent.catchText = false
-            swal("Please wright your initials:", {
+            swal("Please write your initials:", {
               content: "input",
             })
             .then((value) => {
