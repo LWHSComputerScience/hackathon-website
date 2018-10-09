@@ -50,19 +50,24 @@
           "body": this.message
         });
         let initials = this.initials
+        let pushkey = firebase.database().ref('notificationLog/').push()
+        pushkey.set({
+          initials: initials,
+          data: JSON.parse(data)
+        })
+        console.log(pushkey.key)
+        this.initials = ''
+        this.message = ''
+        this.title = ''
         let xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
 
-        xhr.addEventListener("readystatechange",  (e) => {
+        xhr.addEventListener("readystatechange", (e) => {
           if (e.readyState === 4) {
             console.log(e.responseText);
-            this.initials = ''
-            this.message = ''
-            this.title = ''
-            firebase.database.ref('notificationLog/').push().set({
-              initials: initials,
-              data: data
-            })
+            firebase.database().ref('notificationLog/'+pushkey.key + '/pushed').set(true)
+
+
           }
         });
 
@@ -74,6 +79,7 @@
         xhr.setRequestHeader("Postman-Token", "db389565-7ee0-42ea-bb21-d621803aae84");
 
         xhr.send(data);
+
 
       }
 
