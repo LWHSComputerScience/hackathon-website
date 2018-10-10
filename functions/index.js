@@ -35,7 +35,10 @@ exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
     //do something awesome that makes the world a better place
     console.log(response, 'pushed')
   });
-  bot.postMessageToChannel('announcements', `${original.title} ${original.message}`, (data) => {
+  let params = {
+    icon_emoji: ':cat:'
+  }
+  bot.postMessageToChannel('announcements', `${original.title} ${original.message}`, params, (data) => {
     console.log(data)
   });
 

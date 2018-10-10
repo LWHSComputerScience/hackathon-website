@@ -1,0 +1,73 @@
+[debug] [2018-10-10T05:43:04.533Z] ----------------------------------------------------------------------
+[debug] [2018-10-10T05:43:04.535Z] Command:       /Users/ronanfuruta/.nvm/versions/node/v9.5.0/bin/node /Users/ronanfuruta/.nvm/versions/node/v9.5.0/bin/firebase deploy --only functions
+[debug] [2018-10-10T05:43:04.535Z] CLI Version:   5.0.1
+[debug] [2018-10-10T05:43:04.535Z] Platform:      darwin
+[debug] [2018-10-10T05:43:04.535Z] Node Version:  v9.5.0
+[debug] [2018-10-10T05:43:04.536Z] Time:          Tue Oct 09 2018 22:43:04 GMT-0700 (PDT)
+[debug] [2018-10-10T05:43:04.536Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-10-10T05:43:04.547Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-10-10T05:43:04.548Z] > authorizing via signed-in user
+[debug] [2018-10-10T05:43:04.548Z] [iam] checking project hyphenhacks-dc851 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2018-10-10T05:43:04.549Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/hyphenhacks-dc851:testIamPermissions  
+
+[debug] [2018-10-10T05:43:05.372Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'hyphenhacks-dc851'...
+[info] 
+[info] i  deploying functions
+[debug] [2018-10-10T05:43:07.027Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "firebase-admin": "~6.0.0",
+    "firebase-functions": "^2.0.3",
+    "node-fetch": "^2.2.0",
+    "slackbot": "0.0.2",
+    "slackbots": "^1.1.0"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2018-10-10T05:43:07.028Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/hyphenhacks-dc851?view=CONSUMER_VIEW  
+ 
+[debug] [2018-10-10T05:43:07.029Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/hyphenhacks-dc851?view=CONSUMER_VIEW  
+ 
+[debug] [2018-10-10T05:43:08.040Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-10T05:43:08.134Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2018-10-10T05:43:08.135Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/hyphenhacks-dc851  
+ 
+[debug] [2018-10-10T05:43:08.448Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-10T05:43:08.449Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/1007828831500:getServerAppConfig  
+ 
+[debug] [2018-10-10T05:43:08.756Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2018-10-10T05:43:08.758Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/hyphenhacks-dc851/configs  
+ 
+[debug] [2018-10-10T05:43:09.543Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (46.42 KB) for uploading
+[debug] [2018-10-10T05:43:09.956Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/hyphenhacks-dc851/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2018-10-10T05:43:10.545Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-10T05:43:10.545Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-f21c20d7-79c5-4e8d-a48e-5ce1e5f6c349/ae3951e7-f20b-441e-a0dd-abeea809be06.zip?GoogleAccessId=service-1007828831500@gcf-admin-robot.iam.gserviceaccount.com&Expires=1539151991&Signature=Dic2RysLcZDjBFCer5zBQQt%2BcfHUFw2ICPYoGjDqoZh%2BVV6eV%2FSCffWY2w7yz%2BACGrAo%2Fio57LHzwc3VeGQr12yFLwAFXjt5AjiqU7fiUyO2Dce%2BU9m%2BkjHWrYiMUGVhd24hD%2FOYZ8CPqiYkHIFYynCuIvcBLDqOYmgKVNUZXp2omFMtpQ8UWc%2Bv7Cph%2FYpyyHUQNzQoV%2BBK%2BVw1xXaIX1VZnuBwLaHoVJ%2FnmhG7dL1I4L6%2F%2FopmVo9P8pKmKL7aziWNwf9k7PG%2FQtBRiMrJRo%2BFZJU9Vgw5JRy8uzio6Z8OF%2FK0JGEdF1SCki8kLCPFeNHzF5ALQjH7bujNUKGSeQ%3D%3D  
+
+[debug] [2018-10-10T05:43:11.208Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: functions folder uploaded successfully
+[debug] [2018-10-10T05:43:11.210Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/hyphenhacks-dc851/locations/-/functions  
+ 
+[debug] [2018-10-10T05:43:12.481Z] <<< HTTP RESPONSE 200
+[info] i  functions: updating Node.js 6 function sendMessage(us-central1)...
+[debug] [2018-10-10T05:43:12.483Z] Trigger is:  {"eventTrigger":{"resource":"projects/_/instances/hyphenhacks-dc851/refs/notificationLog/{messageId}","eventType":"providers/google.firebase.database/eventTypes/ref.create","service":"firebaseio.com"}}
+[debug] [2018-10-10T05:43:12.484Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/hyphenhacks-dc851/locations/us-central1/functions/sendMessage {"updateMask":"sourceUploadUrl,name,labels,eventTrigger.resource,eventTrigger.eventType,eventTrigger.service"} 
+
+[debug] [2018-10-10T05:43:13.010Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-10T05:43:13.012Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/aHlwaGVuaGFja3MtZGM4NTEvdXMtY2VudHJhbDEvc2VuZE1lc3NhZ2UvQWtZZlhicGVwSms  
+ 
