@@ -9,6 +9,21 @@ let bot = new SlackBot({
 // The Firebase Admin SDK to access the Firebase Realtime Database.
 const admin = require('firebase-admin');
 admin.initializeApp();
+const db = admin.database()
+exports.addToWhitelist = functions.auth.user().onCreate((user) => {
+  console.log(user)
+  const email = user.email
+  const uid = user.uid
+  db.ref('whitelistEmails/').once('value').then((snap) => {
+    if (Object.keys(snap.val()).includes(email)) {
+      db.ref('whitelistUIDs/' + uid ).set(uid)
+      console.log('whitlisted')
+    } else {
+      console.log('not whitlisted')
+    }
+  })
+
+});
 exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
 .onCreate((snapshot, context) => {
 
