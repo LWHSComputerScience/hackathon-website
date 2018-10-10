@@ -37,14 +37,19 @@ exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
   });
   */
   let params = {
-    icon_emoji: ':cat:'
+ 
   }
   bot.getChannels().then(data => {
     console.log(data)
   })
-  bot.postMessageToChannel('announcements', `${original.title} ${original.message}`, params, (data) => {
+  bot.getGroups().then(data => {
+    console.log(data)
+  })
+
+  bot.postTo('announcements', `${original.title} ${original.message}`, params, (data) => {
     console.log(data)
   });
+
 
   return snapshot.val()
 });
