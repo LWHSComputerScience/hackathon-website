@@ -1,9 +1,9 @@
 const fetch = require('node-fetch');
 const functions = require('firebase-functions');
-const SlackBot = require('slackbot');
+const SlackBot = require('slackbots');
 let bot = new SlackBot({
   token: 'xoxb-449331460291-451824055221-1sp5BeSxnYlndFzCgEUTHAQy', // Add a bot https://my.slack.com/services/new/bot and put the token
-  team: 'hyphen-hacks2018'
+  name: 'Hyphen-Hacks-Team'
 });
 
 // The Firebase Admin SDK to access the Firebase Realtime Database.
@@ -35,12 +35,10 @@ exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
     //do something awesome that makes the world a better place
     console.log(response, 'pushed')
   });
-  bot.send("#announcements", `${original.title} ${original.message} `, function(err, res, body) {
-    if(err) {
-      console.log(err, res)
-    };
-    console.log(body);
+  bot.postMessageToChannel('announcements', `${original.title} ${original.message}`, (data) => {
+    console.log(data)
   });
+
   return snapshot.val()
 });
 
