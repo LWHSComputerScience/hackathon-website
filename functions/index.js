@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+const fetch = require('node-fetch');
 const functions = require('firebase-functions');
 const SlackBot = require('slackbots');
 let bot = new SlackBot({
@@ -37,7 +37,10 @@ exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
     //do something awesome that makes the world a better place
     console.log(response, 'pushed')
   });
-  bot.postMessageToUser('Ronan', `${original.title}. ${original.message}`, params);
+  bot.send("#announcements", `${original.title} ${original.message} `, function(err, res, body) {
+    if(err) return;
+    console.log(body);
+  });
   return snapshot.val()
 });
 
