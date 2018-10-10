@@ -1,6 +1,13 @@
+import fetch from 'node-fetch';
 const functions = require('firebase-functions');
 const SlackBot = require('slackbots');
-
+let bot = new SlackBot({
+  token: 'xoxb-449331460291-451824055221-1sp5BeSxnYlndFzCgEUTHAQy', // Add a bot https://my.slack.com/services/new/bot and put the token
+  name: 'hyphen-hacks-team'
+});
+bot.on('start', () => {
+  console.log('slack bot start')
+})
 // The Firebase Admin SDK to access the Firebase Realtime Database.
 const admin = require('firebase-admin');
 admin.initializeApp();
@@ -9,22 +16,28 @@ exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
 
   const original = snapshot.val();
   console.log('received message', context.params.messageId, original);
-  let bot = new SlackBot({
-    token: 'xoxb-449331460291-451824055221-1sp5BeSxnYlndFzCgEUTHAQy', // Add a bot https://my.slack.com/services/new/bot and put the token
-    name: 'hyphen-hacks-team'
+
+  fetch("http://example.com/api/endpoint/", {
+    method: "post",
+    "headers": {
+      "Accept": "application/json",
+      "Accept-Encoding": "gzip, deflate",
+      "Content-Type": "application/json",
+      "cache-control": "no-cache",
+      "Postman-Token": "7e7dd0fa-b234-446f-acfb-b841533fcbcc"
+    },
+
+    //make sure to serialize your JSON body
+    body: JSON.stringify({
+      tittle: original.title,
+      body: original.message
+    })
+  })
+  .then( (response) => {
+    //do something awesome that makes the world a better place
+    console.log(response, 'pushed')
   });
-  bot.on('start', function() {
-    // more information about additional params https://api.slack.com/methods/chat.postMessage
-    var params = {
-      icon_emoji: ':cat:'
-    };
-
-
-
-    // define existing username instead of 'user_name'
-    bot.postMessageToUser('Ronan', `${original.title}. ${original.message}`, params);
-
-  });
+  bot.postMessageToUser('Ronan', `${original.title}. ${original.message}`, params);
   return snapshot.val()
 });
 
