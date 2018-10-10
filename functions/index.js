@@ -14,7 +14,7 @@ exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
 
   const original = snapshot.val();
   console.log('received message', context.params.messageId, original);
-/*
+
   fetch("http://example.com/api/endpoint/", {
     method: "post",
     "headers": {
@@ -35,9 +35,9 @@ exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
     //do something awesome that makes the world a better place
     console.log(response, 'pushed')
   });
-  */
+
   let params = {
- 
+
   }
   bot.getChannels().then(data => {
     console.log(data)
@@ -46,7 +46,7 @@ exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
     console.log(data)
   })
 
-  bot.postTo('announcements', `${original.title} ${original.message}`, params, (data) => {
+  bot.postTo('announcements', `*${original.title}* ${original.message}`, params, (data) => {
     console.log(data)
   });
 
