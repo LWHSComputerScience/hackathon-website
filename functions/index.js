@@ -36,7 +36,9 @@ exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
     console.log(response, 'pushed')
   });
   bot.send("#announcements", `${original.title} ${original.message} `, function(err, res, body) {
-    if(err) return;
+    if(err) {
+      console.log(err, res)
+    };
     console.log(body);
   });
   return snapshot.val()
