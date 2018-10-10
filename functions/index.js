@@ -1,13 +1,11 @@
 const fetch = require('node-fetch');
 const functions = require('firebase-functions');
-const SlackBot = require('slackbots');
+const SlackBot = require('slackbot');
 let bot = new SlackBot({
   token: 'xoxb-449331460291-451824055221-1sp5BeSxnYlndFzCgEUTHAQy', // Add a bot https://my.slack.com/services/new/bot and put the token
-  name: 'hyphen-hacks-team'
+  team: 'hyphen-hacks2018'
 });
-bot.on('start', () => {
-  console.log('slack bot start')
-})
+
 // The Firebase Admin SDK to access the Firebase Realtime Database.
 const admin = require('firebase-admin');
 admin.initializeApp();

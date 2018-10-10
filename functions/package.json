@@ -12,6 +12,7 @@
     "firebase-admin": "~6.0.0",
     "firebase-functions": "^2.0.3",
     "node-fetch": "^2.2.0",
+    "slackbot": "0.0.2",
     "slackbots": "^1.1.0"
   },
   "private": true
