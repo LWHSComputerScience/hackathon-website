@@ -14,8 +14,8 @@ exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
 
   const original = snapshot.val();
   console.log('received message', context.params.messageId, original);
-
-  fetch("http://example.com/api/endpoint/", {
+/*
+  fetch("https://exp.host/--/api/v2/push/send", {
     method: "post",
     "headers": {
       "Accept": "application/json",
@@ -27,6 +27,7 @@ exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
 
     //make sure to serialize your JSON body
     body: JSON.stringify({
+      to:
       tittle: original.title,
       body: original.message
     })
@@ -35,7 +36,7 @@ exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
     //do something awesome that makes the world a better place
     console.log(response, 'pushed')
   });
-
+*/
   let params = {
 
   }
