@@ -44,41 +44,18 @@
     },
     methods: {
       send() {
-        let data = JSON.stringify({
-          "to": "ExponentPushToken[jlhUBnMFCG_jwlKvnX_dzA]",
-          "title": this.title,
-          "body": this.message
-        });
-        let initials = this.initials
+
         let pushkey = firebase.database().ref('notificationLog/').push()
         pushkey.set({
-          initials: initials,
-          data: JSON.parse(data)
+          initials: this.initials,
+          title: this.title,
+          message: this.message
         })
         console.log(pushkey.key)
         this.initials = ''
         this.message = ''
         this.title = ''
-        let xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
 
-        xhr.addEventListener("readystatechange", (e) => {
-          if (e.readyState === 4) {
-            console.log(e.responseText);
-            firebase.database().ref('notificationLog/'+pushkey.key + '/pushed').set(true)
-
-
-          }
-        });
-
-        xhr.open("POST", "https://exp.host/--/api/v2/push/send");
-        xhr.setRequestHeader("Accept", "application/json");
-        xhr.setRequestHeader("Accept-Encoding", "gzip, deflate");
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.setRequestHeader("cache-control", "no-cache");
-        xhr.setRequestHeader("Postman-Token", "db389565-7ee0-42ea-bb21-d621803aae84");
-
-        xhr.send(data);
 
 
       }

@@ -53,7 +53,7 @@ enquirer.prompt(['newVersion'])
             db.ref('adminVersion').set(answers.newVersion).then((e) => {
               console.log('upadated global version')
               console.log('deploying...')
-              exec('firebase deploy', (err, stdout, stderr) => {
+              exec('firebase deploy --only hosting', (err, stdout, stderr) => {
                 if (err) {
                   // node couldn't execute the command
                  process.exit(1)
