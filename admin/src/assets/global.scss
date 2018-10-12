@@ -282,14 +282,28 @@ body, html, #app, .page {
   grid-row-end: 3;
   border-top: solid 2px $light;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1%;
+  .legal {
+    justify-self: flex-end;
+    align-self: flex-end;
+    a {
+      text-decoration: none;
+      font-weight: 600;
+      color: $primary;
+    }
+  }
 }
 .footer__quote {
   margin: 1%;
   font-size: 1rem;
   text-align: center;
   cursor: pointer;
+  justify-self: center;
+  align-self: center;
+  text-align: center;
 }
 .page {
   //background: orange;

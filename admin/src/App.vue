@@ -38,6 +38,8 @@
     <router-view/>
     <footer v-if="$route.path != '/'" class="app__footer">
       <p @click="refreshJoke" class="footer__quote" v-html="quote"></p>
+
+      <small class="legal">v{{version}} Dashboard created by <a href="https://brainstormincstudio.com" target="_blank">Ronan Furuta</a> @ <a href="https://stomprocket.io" target="_blank">Stomp Rocket</a></small>
     </footer>
   </div>
 </template>
