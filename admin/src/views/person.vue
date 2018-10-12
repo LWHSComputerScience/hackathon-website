@@ -6,7 +6,7 @@
     <h2 class="person__school">{{person.school}} {{person.graduationYear}}</h2>
     <div class="info">
       <p>Email: <b>{{person.email}}</b></p>
-      <p>Phone: <b>{{person.phone}}</b></p>
+      <p>Phone: <b>{{ formatPhoneNumber(person.phone)}}</b></p>
       <p v-if="person.role == 'attendee'" >Date Of Birth: <b>{{person.DOB}}</b></p>
       <p v-if="person.role == 'attendee'">Gender: <b>{{person.gender}}</b></p>
       <p v-if="person.role == 'attendee'">Race/Ethnicity: <b>{{person.race}}</b></p>
@@ -73,6 +73,14 @@
       })
     },
     methods: {
+      formatPhoneNumber(phoneNumberString) {
+        var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+        var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
+        if (match) {
+          return '(' + match[1] + ') ' + match[2] + '-' + match[3]
+        }
+        return null
+      },
       update(person, record) {
         if (record === 'waiverComplete') {
           if (person[record]) {
