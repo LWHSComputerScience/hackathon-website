@@ -11,7 +11,7 @@ fetch("https://exp.host/--/api/v2/push/send", {
 
   //make sure to serialize your JSON body
   body: JSON.stringify({
-    to: 'ExponentPushToken[jlhUBnMFCG_jwlKvnX_dzA]',
+    to: 'ExponentPushToken[4S1ephNfJhY-i-5asjV8dK]',
     title: 'Testing',
     body: 'Let Ronan know if you get this please!'
   })

@@ -34,7 +34,7 @@ exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
   db.ref('tokens/').once('value').then((snap) => {
     for (let key in snap.val()) {
       if (snap.val().hasOwnProperty(key)) {
-        let token = snap.val()[key]
+        let token = snap.val()[key].token
         fetch("https://exp.host/--/api/v2/push/send", {
           method: "post",
           "headers": {
