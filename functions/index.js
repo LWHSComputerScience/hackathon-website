@@ -96,7 +96,7 @@ exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
       console.log(data)
     })
 */
-    bot.postTo('announcements', `@channel *${original.title}* ${original.message}`, params, (data) => {
+    bot.postTo('announcements', `<!channel> *${original.title}* ${original.message}`, params, (data) => {
       console.log(data)
     });
   }
