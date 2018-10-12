@@ -17,17 +17,18 @@
 }
 .notification__form {
   padding-top: 5%;
-  width: 80%;
+  width: 50%;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+
   .input {
-    margin-top: 1%;
+
+    margin-top: 4%;
     padding: 1%;
     font-size: 0.8rem;
-    width: 50%;
+    width: 100%;
     border: none;
     background: none;
     margin-bottom: 1%;
@@ -35,13 +36,18 @@
     @include transition;
     &:hover{
       border-bottom: $checked solid 1.2px;
-      width: 52%;
+      //width: 102%;
     }
     &:focus {
       outline: none;
       border-bottom: $checked solid 1.2px;
-      width: 52%;
+      //width: 102%;
     }
+  }
+  .btn {
+    width: 50%;
+    align-self: center;
+    font-size: 1rem;
   }
 }
 .person.page {

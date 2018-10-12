@@ -31,35 +31,38 @@ exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
 
   const original = snapshot.val();
   console.log('received message', context.params.messageId, original);
-  db.ref('tokens/').once('value').then((snap) => {
-    for (let key in snap.val()) {
-      if (snap.val().hasOwnProperty(key)) {
-        let token = snap.val()[key].token
-        fetch("https://exp.host/--/api/v2/push/send", {
-          method: "post",
-          "headers": {
-            "Accept": "application/json",
-            "Accept-Encoding": "gzip, deflate",
-            "Content-Type": "application/json",
-            "cache-control": "no-cache",
-            "Postman-Token": "7e7dd0fa-b234-446f-acfb-b841533fcbcc"
-          },
+  if (original.mobile) {
+    db.ref('tokens/').once('value').then((snap) => {
+      for (let key in snap.val()) {
+        if (snap.val().hasOwnProperty(key)) {
+          let token = snap.val()[key].token
+          fetch("https://exp.host/--/api/v2/push/send", {
+            method: "post",
+            "headers": {
+              "Accept": "application/json",
+              "Accept-Encoding": "gzip, deflate",
+              "Content-Type": "application/json",
+              "cache-control": "no-cache",
+              "Postman-Token": "7e7dd0fa-b234-446f-acfb-b841533fcbcc"
+            },
 
-          //make sure to serialize your JSON body
-          body: JSON.stringify({
-            to: token,
-            title: original.title,
-            body: original.message
+            //make sure to serialize your JSON body
+            body: JSON.stringify({
+              to: token,
+              title: original.title,
+              body: original.message
+            })
           })
-        })
-        .then((response) => {
-          //do something awesome that makes the world a better place
-          console.log(response, 'pushed', token)
-        });
+          .then((response) => {
+            //do something awesome that makes the world a better place
+            console.log(response, 'pushed', token)
+          });
+        }
       }
-    }
 
-  })
+    })
+  }
+
   /*
     fetch("https://exp.host/--/api/v2/push/send", {
       method: "post",
@@ -83,17 +86,20 @@ exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
       console.log(response, 'pushed')
     });
   */
-  let params = {}
-  bot.getChannels().then(data => {
-    console.log(data)
-  })
-  bot.getGroups().then(data => {
-    console.log(data)
-  })
-
-  bot.postTo('announcements', `@channel *${original.title}* ${original.message}`, params, (data) => {
-    console.log(data)
-  });
+  if (original.slack) {
+    let params = {}
+    /*
+    bot.getChannels().then(data => {
+      console.log(data)
+    })
+    bot.getGroups().then(data => {
+      console.log(data)
+    })
+*/
+    bot.postTo('announcements', `@channel *${original.title}* ${original.message}`, params, (data) => {
+      console.log(data)
+    });
+  }
 
 
   return snapshot.val()
