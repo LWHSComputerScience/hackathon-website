@@ -273,7 +273,24 @@ body, html, #app, .page {
 
   //background: red;
 }
+.nav__analytics {
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  //background: red;
+ height: 35vh;
+}
+.analytics__row {
+  text-align: left;
 
+  b {
+    font-size: 2rem;
+  }
+  p {
+    font-weight: 400;
+  }
+}
 .app__footer {
   // background: blue;
   grid-column-start: 2;

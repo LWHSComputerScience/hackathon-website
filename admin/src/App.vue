@@ -30,6 +30,30 @@
         <p class="alert__version">Current Version: {{version}}</p>
         <p class="alert__version new">Newest Version: {{newestVersion}}</p>
       </div>
+      <div class="nav__analytics">
+        <div class="analytics__row">
+          <b>{{analytics.checkedIn}}</b>
+          <p>Checked In</p>
+        </div>
+        <div class="analytics__row">
+          <b>{{analytics.onCampus}}</b>
+          <p>On Campus</p>
+        </div>
+        <div class="analytics__row">
+          <b>{{analytics.waiverComplete}}</b>
+          <p>Waivers Complete</p>
+        </div>
+        <div class="analytics__row">
+          <b>{{analytics.attendees}}</b>
+          <p>Attendees</p>
+
+        </div>
+        <div class="analytics__row">
+          <b>{{analytics.volunteers}}</b>
+          <p>Volunteers</p>
+        </div>
+
+      </div>
       <a class="stomprocketBranding" href="https://stomprocket.io" target="_blank">
         <p>developed by:</p>
         <img src="@/assets/wordmarksmall.png" alt="">
@@ -62,7 +86,8 @@
         invert: false,
         catchText: true,
         version: require('../package.json').version,
-        newestVersion: null
+        newestVersion: null,
+        analytics: {}
       }
     },
     computed: {
@@ -172,12 +197,20 @@
     },
     mounted() {
 
-      firebase.database().ref('/attendeeDB/people/').orderByChild('name').on('value', (data) => {
+      firebase.database().ref('/attendeeDB/people/').on('value', (data) => {
         //console.log(data.val())
         console.log(' db load')
         this.totalList = {}
 
         this.totalList = data.val()
+
+      })
+      firebase.database().ref('/attendeeDB/analytics/').on('value', (data) => {
+        //console.log(data.val())
+        console.log(' db load')
+        this.analytics = {}
+
+        this.analytics = data.val()
 
       })
       firebase.database().ref('adminVersion').on('value', (data) => {
