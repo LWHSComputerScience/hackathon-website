@@ -30,7 +30,7 @@
         <p class="alert__version">Current Version: {{version}}</p>
         <p class="alert__version new">Newest Version: {{newestVersion}}</p>
       </div>
-      <div class="nav__analytics">
+      <div v-if="version >= newestVersion" class="nav__analytics">
         <div class="analytics__row">
           <b>{{analytics.checkedIn}}</b>
           <p>Checked In</p>
