@@ -64,7 +64,10 @@ exports.analytics = functions.database.ref('/attendeeDB/people/').onWrite((snap,
   }
 
   db.ref('attendeeDB/analytics').set(analytics)
-  db.ref('attendeeDB/analyticsLog').push().set(analytics)
+  db.ref('attendeeDB/analyticsLog').push().set({
+    time: Date.now(),
+    data: analytics
+  })
   console.log('updated analytics', analytics)
   return data
 
