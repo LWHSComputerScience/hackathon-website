@@ -99,6 +99,7 @@
                 firebase.database().ref('attendeeDB/people/' + person.id).set(person)
                 this.$parent.catchText = true
               } else {
+                person[record] = true
                 this.$parent.catchText = true
               }
 
@@ -109,13 +110,14 @@
               content: "input",
             })
             .then((value) => {
-              if (value && value != ' ') {
+              if (value && value != '') {
                 person[record] = true;
                 person.authorizer = value;
                 firebase.database().ref('attendeeDB/people/' + person.id).set(person)
                 this.$parent.catchText = true
               } else {
                 swal("Please enter initials", "Initials are required to authorize a waiver", "error")
+                person[record] = false
                 this.$parent.catchText = true
               }
 

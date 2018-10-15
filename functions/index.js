@@ -32,15 +32,16 @@ exports.addToWhitelist = functions.auth.user().onCreate((user) => {
 */
 exports.analytics = functions.database.ref('/attendeeDB/people/').onWrite((snap, context) => {
 
-    const data = snap.after.val()
-    let analytics = {
-      checkedIn: 0,
-      people: 0,
-      attendees: 0,
-      volunteers: 0,
-      onCampus: 0,
-      waiverComplete: 0
-    }
+  const data = snap.after.val()
+  let analytics = {
+    checkedIn: 0,
+    people: 0,
+    attendees: 0,
+    volunteers: 0,
+    onCampus: 0,
+    waiverComplete: 0
+  }
+  if (data) {
     for (var key in data) {
       let person = data[key]
       analytics.people++
@@ -60,9 +61,12 @@ exports.analytics = functions.database.ref('/attendeeDB/people/').onWrite((snap,
       }
 
     }
-    db.ref('attendeeDB/analytics').set(analytics)
-    console.log('updated analytics', analytics)
-    return data
+  }
+
+  db.ref('attendeeDB/analytics').set(analytics)
+  db.ref('attendeeDB/analyticsLog').push().set(analytics)
+  console.log('updated analytics', analytics)
+  return data
 
 
 })
