@@ -1,24 +1,22 @@
 const fetch = require('node-fetch');
-fetch("https://exp.host/--/api/v2/push/send", {
-  method: "post",
-  "headers": {
-    "Accept": "application/json",
-    "Accept-Encoding": "gzip, deflate",
-    "Content-Type": "application/json",
-    "cache-control": "no-cache",
-    "Postman-Token": "7e7dd0fa-b234-446f-acfb-b841533fcbcc"
-  },
-
-  //make sure to serialize your JSON body
-  body: JSON.stringify({
-    to: 'ExponentPushToken[4S1ephNfJhY-i-5asjV8dK]',
-    title: 'Testing',
-    body: 'Let Ronan know if you get this please!'
-  })
+const functions = require('firebase-functions');
+const SlackBot = require('slackbots');
+let bot = new SlackBot({
+  token: 'xoxb-449331460291-451824055221-1sp5BeSxnYlndFzCgEUTHAQy', // Add a bot https://my.slack.com/services/new/bot and put the token
+  name: 'Hyphen-Hacks-Team'
+});
+let params = {
+  as_user: true,
+  icon_url: 'https://hyphen-hacks.com/img/logos/hyphhack.png'
+}
+/*
+bot.getChannels().then(data => {
+  console.log(data)
 })
-.then((response) => {
-  //do something awesome that makes the world a better place
-  console.log(response, 'pushed')
-}).catch(e => {
-  console.log(e)
+bot.getGroups().then(data => {
+  console.log(data)
 })
+*/
+bot.postTo('announcements', `test test`, params, (data) => {
+  console.log(data)
+});

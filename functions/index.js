@@ -10,6 +10,10 @@ let bot = new SlackBot({
 const admin = require('firebase-admin');
 admin.initializeApp();
 const db = admin.database()
+const params = {
+  as_user: true,
+  icon_url: 'https://hyphen-hacks.com/img/logos/hyphhack.png'
+}
 /*
 exports.addToWhitelist = functions.auth.user().onCreate((user) => {
   console.log(user)
@@ -26,6 +30,42 @@ exports.addToWhitelist = functions.auth.user().onCreate((user) => {
 
 });
 */
+exports.analytics = functions.database.ref('/attendeeDB/people/').onWrite((snap, context) => {
+
+    const data = snap.after.val()
+    let analytics = {
+      checkedIn: 0,
+      people: 0,
+      attendees: 0,
+      volunteers: 0,
+      onCampus: 0,
+      waiverComplete: 0
+    }
+    for (var key in data) {
+      let person = data[key]
+      analytics.people++
+      if (person.checkedIn) {
+        analytics.checkedIn++
+      }
+      if (person.role === 'volunteer') {
+        analytics.volunteers++
+      } else if (person.role === 'attendee') {
+        analytics.attendees++
+      }
+      if (person.onCampus) {
+        analytics.onCampus++
+      }
+      if (person.waiverComplete) {
+        analytics.waiverComplete++
+      }
+
+    }
+    db.ref('attendeeDB/analytics').set(analytics)
+    console.log('updated analytics', analytics)
+    return data
+
+
+})
 exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
 .onCreate((snapshot, context) => {
 
@@ -87,7 +127,7 @@ exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
     });
   */
   if (original.slack) {
-    let params = {}
+
     /*
     bot.getChannels().then(data => {
       console.log(data)
