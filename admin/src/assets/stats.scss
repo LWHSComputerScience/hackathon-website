@@ -1,0 +1,28 @@
+@import './vars.scss';
+
+.stats {
+  padding: 2%;
+  .chart__container {
+    @include shadow--small;
+    -webkit-border-radius: $rounding;
+    -moz-border-radius: $rounding;
+    border-radius: $rounding;
+    margin-top: 2%;
+    padding: 2%;
+
+
+  }
+}
+.stats__heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 2%;
+
+}
+.chart__heading {
+  font-weight: 600;
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 2%;
+}

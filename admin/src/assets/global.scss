@@ -280,18 +280,22 @@ body, html, #app, .page {
   margin: auto 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   //background: red;
- height: 35vh;
+ height: 25vh;
 }
 .analytics__row {
   text-align: left;
+  display: flex;
+  align-items:  center;
 
   b {
     font-size: 2rem;
+    margin-right: 1%;
   }
   p {
     font-weight: 400;
+
   }
 }
 .app__footer {

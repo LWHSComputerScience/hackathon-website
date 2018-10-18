@@ -25,6 +25,7 @@
 
       <router-link class="btn nav__notification" to="/n">Send a notification</router-link>
       <router-link class="btn nav__add" to="/add">Add a person</router-link>
+      <router-link class="btn nav__add" to="/stats">View analytics</router-link>
       <div class="alert" v-if="version < newestVersion">
         <h1 class="alert__heading">New Version Available!! {{newestVersion}}</h1>
         <p class="alert__text">Please empty your application cache and reload to get the latest version of the dashboard.</p>

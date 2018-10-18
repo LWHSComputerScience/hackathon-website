@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import auth from './views/auth.vue'
 import Person from './views/person.vue'
 import Add from './views/add.vue'
+import Stats from './views/stats.vue'
 import notification from './views/notification.vue'
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -28,6 +29,14 @@ let router = new Router({
       path: '/add',
       name: 'add',
       component: Add,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/stats',
+      name: 'stats',
+      component: Stats,
       meta: {
         requiresAuth: true
       }
