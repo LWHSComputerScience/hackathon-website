@@ -50,7 +50,8 @@
         maxTimeStamp: false,
         percentCheckedIn: '',
         percentWaivers: '',
-        percentOnCampus: ''
+        percentOnCampus: '',
+        lineTension: 0
       }
     },
     mounted() {
@@ -118,35 +119,36 @@
               backgroundColor: 'rgb(255, 99, 132, 0)',
               borderColor: '#e74c3c',
               data: this.checkinsOverTime,
-              lineTension: 0,
+              lineTension: this.lineTension,
             },
               {
                 label: "People On Campus",
                 backgroundColor: 'rgb(255, 99, 132, 0)',
                 borderColor: '#3498db',
                 data: this.peopleOnCampus,
-                lineTension: 0,
+                lineTension: this.lineTension,
               },
               {
                 label: "Waivers Completed",
                 backgroundColor: 'rgb(255, 99, 132, 0)',
                 borderColor: '#2ecc71',
                 data: this.waiversCompleted,
-                lineTension: 0,
+                lineTension: this.lineTension,
               },
               {
-                label: "Attendees",
+                label: "Attendees (different scale)",
                 backgroundColor: 'rgb(255, 99, 132, 0)',
                 borderColor: '#9b59b6',
                 data: this.attendees,
-                lineTension: 0,
+                lineTension: this.lineTension,
+                yAxisID: 'y2'
               },
               {
                 label: "Volunteers",
                 backgroundColor: 'rgb(255, 99, 132, 0)',
                 borderColor: '#e67e22',
                 data: this.voulunteers,
-                lineTension: 0,
+                lineTension: this.lineTension,
               }]
           },
 
@@ -160,12 +162,21 @@
                 time: {
                   unit: 'minute'
                 }
-              }],
+              }
+                ],
               yAxes: [{
                 ticks: {
                   beginAtZero: true
                 }
-              }]
+              },
+                {
+                  id: 'y2',
+                  display: false,
+                  ticks: {
+                    beginAtZero: true
+
+                  }
+                }]
             }
           }
         });
