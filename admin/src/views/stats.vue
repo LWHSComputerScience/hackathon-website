@@ -1,9 +1,26 @@
 <template>
   <div class="stats page">
     <router-link class="backBtn" to="/a/">back</router-link>
+    <h1 class="stats__heading">Analytics</h1>
+
+    <div class="stat__block">
+      <div class="stat">
+        <b>{{percentCheckedIn}}%</b>
+        <p>of registrants checked in</p>
+      </div>
+      <div class="stat">
+        <b>{{percentWaivers}}%</b>
+        <p>of waivers completed</p>
+      </div>
+      <div class="stat">
+        <b>{{percentOnCampus}}%</b>
+        <p>of checked in attendees on campus</p>
+      </div>
+
+    </div>
 
     <div class="chart__container">
-      <h1 class="stats__heading">Analytics</h1>
+    
       <canvas class="chart" id="checkins"></canvas>
     </div>
 
@@ -27,15 +44,23 @@
         checkinsOverTime: [],
         peopleOnCampus: [],
         waiversCompleted: [],
-        attendees:[],
+        attendees: [],
         voulunteers: [],
         lowestTimeStamp: false,
-        maxTimeStamp: false
+        maxTimeStamp: false,
+        percentCheckedIn: '',
+        percentWaivers: '',
+        percentOnCampus: ''
       }
     },
     mounted() {
       //this.$parent.loading = true
+
       firebase.database().ref('attendeeDB/analyticsLog').on('value', (snapshot) => {
+        let currentAnalytics = this.$parent.analytics
+        this.percentCheckedIn = Math.round((currentAnalytics.checkedIn / currentAnalytics.attendees) * 100)
+        this.percentWaivers = Math.round((currentAnalytics.waiverComplete / currentAnalytics.attendees) * 100)
+        this.percentOnCampus = Math.round((currentAnalytics.onCampus / currentAnalytics.attendees) * 100)
         console.log('stats loaded')
         this.log = snapshot.val();
 
@@ -143,7 +168,7 @@
             }
           }
         });
-      //  this.$parent.loading = false
+        //  this.$parent.loading = false
       })
 
 
