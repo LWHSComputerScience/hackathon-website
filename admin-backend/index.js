@@ -5,7 +5,9 @@ const csv = require('fast-csv')
 // PATHS TO CSVs TO UPLOAD HERE!!
 // attendees
 let students = fs.createReadStream("./private/attendees.csv");
+let resgistrations = fs.createReadStream("./private/registrations");
 // volunteers
+let registrationData = {}
 let teachers = fs.createReadStream("./private/volunteers.csv");
 let studentData = {}
 let teacherData = {}
@@ -105,6 +107,52 @@ let teacherStream = csv()
 
   });
 });
+let registrationStream = csv()
+.on("data", function (row) {
+  let id = uuidv1();
 
-students.pipe(studentsStream);
-teachers.pipe(teacherStream);
+  let person = {
+    Timestamp: row[3],
+    email: row[2],
+    name: row[1],
+    phone: row[4],
+    DOB: row[5],
+    levelOfStudy: row[6],
+    graduationYear: Number(row[7]),
+    school: row[9],
+    gender: row[20],
+    shirtSize: row[10],
+    race: row[11],
+    interestedMajor: row[12],
+    dietaryRestrictions: row[13],
+    specialNeeds: row[14],
+    compsciHistory: row[15],
+    aplicationStatus: row[18],
+    sponsor: row[19],
+    referral: row[21],
+    role: 'attendee',
+    waiverComplete: false,
+    checkedIn: false,
+    onCampus: false,
+    id: id
+  }
+  if (person.name !== "Name") {
+
+    db.ref(baseURL + id).set(person)
+    registrationData[id] = person;
+  }
+
+
+})
+.on("end", function () {
+  console.log("done");
+  fs.writeFile("./private/registrations.json", JSON.stringify(registrationData), function (err) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log("The file was saved!");
+  });
+});
+//students.pipe(studentsStream);
+//teachers.pipe(teacherStream);
+resgistrations.pipe(registrationStream)

@@ -16,6 +16,7 @@
       <p v-if="person.role == 'attendee'">Shirt Size: <b>{{person.shirtSize}}</b></p>
       <p v-if="person.role == 'attendee'">Interested Major: <b>{{person.interestedMajor}}</b></p>
       <p v-if="person.role == 'attendee'">Computer Science History: <b>{{person.compsciHistory}}</b></p>
+      <p v-if="person.referral">Referral Friend: <b>{{person.referral}}</b></p>
       <div class="checkboxRow">
         <p>Waiver Complete</p>
         <div class="checkbox">
