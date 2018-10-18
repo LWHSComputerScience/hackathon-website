@@ -1,9 +1,15 @@
 @import './vars.scss';
+.add .checkboxRow {
+  margin-top: 2%;
+}
 .notificationTitle {
   font-weight: 600;
   font-size: 2.5rem;
   margin-top: 3%;
   text-align: center;
+}
+.personSubmit {
+  margin-top: 2%;
 }
 .notifications__container {
   @include shadow--small;

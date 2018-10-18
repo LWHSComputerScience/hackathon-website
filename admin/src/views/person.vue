@@ -2,8 +2,9 @@
   <div class="person page">
     <router-link class="backBtn" to="/a/">back</router-link>
     <h1 v-if="person.role == 'attendee'" class="person__name">{{person.name}} <span>({{person.role}})</span></h1>
-    <h1 v-if="person.role == 'volunteer'" class="person__name">{{person.first}} {{person.last}} <span>({{person.role}})</span></h1>
-    <h2 class="person__school">{{person.school}} {{person.graduationYear}}</h2>
+    <h1 v-if="person.role == 'volunteer' && person.first" class="person__name">{{person.first}} {{person.last}} <span>({{person.role}})</span></h1>
+    <h1 v-if="person.role == 'volunteer' && !person.first" class="person__name">{{person.name}} <span>({{person.role}})</span></h1>
+    <h2 v-if="person.attendee" class="person__school">{{person.school}} {{person.graduationYear}}</h2>
     <div class="info">
       <p>Email: <b>{{person.email}}</b></p>
       <p>Phone: <b>{{ formatPhoneNumber(person.phone)}}</b></p>

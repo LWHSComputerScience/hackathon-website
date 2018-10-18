@@ -26,7 +26,8 @@
 
       </div>
       <div v-if="person.role == 'volunteer'" @click="open(person.id)" class="person">
-        <h1 class="person__name">{{person.first}} {{person.last}}</h1>
+        <h1 class="person__name" v-if="person.first">{{person.first}} {{person.last}}</h1>
+        <h1 class="person__name" v-if="!person.first">{{person.name}}</h1>
         <p class="person__email">{{person.email}}</p>
         <p class="person__gender">volunteer</p>
         <div @click="preventOpen" class="checkboxRow waiver">
