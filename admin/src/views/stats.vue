@@ -20,7 +20,7 @@
     </div>
 
     <div class="chart__container">
-    
+
       <canvas class="chart" id="checkins"></canvas>
     </div>
 
@@ -153,6 +153,7 @@
           // Configuration options go here
           options: {
             maintainAspectRatio: true,
+            animation: false,
             scales: {
               xAxes: [{
                 type: 'time',
