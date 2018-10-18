@@ -74,7 +74,7 @@ exports.analytics = functions.database.ref('/attendeeDB/people/').onWrite((snap,
     console.log('updated analytics', analytics)
   })
 
-  return snap.ater.val()
+  return snap.after.val()
 
 
 })

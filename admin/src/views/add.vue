@@ -20,7 +20,7 @@
         </select>
         <input v-if="role == 'attendee'" type="text" class="notification__form__title input" placeholder="School"
                v-model="school">
-        <input v-if="role == 'attendee'" type="text" class="notification__form__title input"
+        <input v-if="role == 'attendee'" type="number" class="notification__form__title input"
                placeholder="Graduation Year" v-model="graduationDate">
         <div class="checkboxRow">
           <p>Waiver Complete</p>
@@ -116,7 +116,7 @@
         this.phone = '';
         this.DOB = '';
         this.levelOfStudy = '';
-        this.graduationYear = "";
+        this.graduationDate = "";
         this.gender = '';
         this.shirtSize = "";
         this.dietaryRestrictions = "";
