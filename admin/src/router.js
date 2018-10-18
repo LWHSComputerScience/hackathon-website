@@ -68,7 +68,8 @@ let router = new Router({
     }
   ]
 })
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) =>{
+  //console.log(to)
   firebase.database().ref('/whitelistUIDs').once('value').then(snapshot => {
     whitelist = snapshot.val()
     let currentUser = false

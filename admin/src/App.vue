@@ -1,5 +1,12 @@
 <template>
   <div @keydown="focusSearch" id="app">
+    <div v-if="loading"  id="loading">
+      <div class="hollowLoader">
+        <div class="largeBox"></div>
+        <div class="smallBox"></div>
+      </div>
+      <h1>Loading</h1>
+    </div>
     <nav v-if="$route.path != '/'" class="app__nav">
       <h1 @click="searchHome" class="nav__header">Hyphen-Hacks Dashboard</h1>
       <input autocomplete="off" id="search" @keypress="searchHome" @keypress.enter="enter" v-model="search"
@@ -28,7 +35,8 @@
       <router-link class="btn nav__add" to="/stats">View analytics</router-link>
       <div class="alert" v-if="version < newestVersion">
         <h1 class="alert__heading">New Version Available!! {{newestVersion}}</h1>
-        <p class="alert__text">Please empty your application cache and reload to get the latest version of the dashboard.</p>
+        <p class="alert__text">Please empty your application cache and reload to get the latest version of the
+          dashboard.</p>
         <p class="alert__version">Current Version: {{version}}</p>
         <p class="alert__version new">Newest Version: {{newestVersion}}</p>
       </div>
@@ -65,7 +73,8 @@
     <footer v-if="$route.path != '/'" class="app__footer">
       <p @click="refreshJoke" class="footer__quote" v-html="quote"></p>
 
-      <small class="legal">v{{version}} Dashboard created by <a href="https://brainstormincstudio.com" target="_blank">Ronan Furuta</a> @ <a href="https://stomprocket.io" target="_blank">Stomp Rocket</a></small>
+      <small class="legal">v{{version}} Dashboard created by <a href="https://brainstormincstudio.com" target="_blank">Ronan
+        Furuta</a> @ <a href="https://stomprocket.io" target="_blank">Stomp Rocket</a></small>
     </footer>
   </div>
 </template>
@@ -79,6 +88,7 @@
     name: 'appContainer',
     data() {
       return {
+        loading: true,
         totalList: {},
         quote: '',
         search: '',
@@ -205,6 +215,7 @@
         this.totalList = {}
 
         this.totalList = data.val()
+        this.loading = false;
 
       })
       firebase.database().ref('/attendeeDB/analytics/').on('value', (data) => {

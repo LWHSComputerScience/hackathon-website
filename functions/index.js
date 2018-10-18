@@ -30,9 +30,13 @@ exports.addToWhitelist = functions.auth.user().onCreate((user) => {
 
 });
 */
+
 exports.analytics = functions.database.ref('/attendeeDB/people/').onWrite((snap, context) => {
 
   const data = snap.after.val()
+  db.ref('/attendeeDB/people/').once('value').then(snap => {
+
+  })
   let analytics = {
     checkedIn: 0,
     people: 0,
@@ -73,6 +77,7 @@ exports.analytics = functions.database.ref('/attendeeDB/people/').onWrite((snap,
 
 
 })
+
 exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')
 .onCreate((snapshot, context) => {
 

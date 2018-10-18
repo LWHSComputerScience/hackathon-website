@@ -1,10 +1,16 @@
 $primary: #1C1C1C;
 $light: #cacaca;
 $rounding: 5px;
-$checked: #07B18E;
+$checked: #f1c40f;
 $alert: #ff6b6b;
 
-$md-checkbox-checked-color: #07B18E;
+$hollowBoxSize: 3em;
+$hollowLight: $checked;
+$hollowDark: white;
+$hollowTiming: 1.25s;
+
+
+$md-checkbox-checked-color: $checked;
 $md-checkbox-border-color: rgba(0, 0, 0, 0.54);
 $md-checkbox-border-color-disabled: rgba(0, 0, 0, 0.26);
 $md-checkbox-checked-color-disabled: rgba(0, 0, 0, 0.26);

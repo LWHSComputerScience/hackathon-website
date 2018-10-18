@@ -5,16 +5,17 @@ import './registerServiceWorker'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import * as Sentry from '@sentry/browser'
+
 const version = require('../package.json').version
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
     dsn: 'https://3567e1a0fe884fae9005fc944c6609fc@sentry.io/1301364',
-    integrations: [new Sentry.Integrations.Vue({ Vue })],
+    integrations: [new Sentry.Integrations.Vue({Vue})],
     release: `Hyphen-Hacks-Dashboard@${version}`
   })
 }
 
-let app;
+
 const config = {
   apiKey: "AIzaSyC7rd-5Ra6ae0BQiFfVe2G0H3WFdNZw1bo",
   authDomain: "hyphenhacks-dc851.firebaseapp.com",
@@ -26,12 +27,11 @@ const config = {
 firebase.initializeApp(config);
 
 Vue.config.productionTip = false
-firebase.auth().onAuthStateChanged((user) => {
-  if (!app) {
-    app = new Vue({
-      router,
-      render: h => h(App)
-    }).$mount('#app')
 
-  }
-})
+new Vue({
+  router,
+  render: h => h(App)
+}).$mount('#app')
+
+
+

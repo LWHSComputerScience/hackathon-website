@@ -34,6 +34,7 @@
       }
     },
     mounted() {
+      //this.$parent.loading = true
       firebase.database().ref('attendeeDB/analyticsLog').on('value', (snapshot) => {
         console.log('stats loaded')
         this.log = snapshot.val();
@@ -131,7 +132,7 @@
               xAxes: [{
                 type: 'time',
                 time: {
-                  unit: 'hour'
+                  unit: 'minute'
                 }
               }],
               yAxes: [{
@@ -142,6 +143,7 @@
             }
           }
         });
+      //  this.$parent.loading = false
       })
 
 
