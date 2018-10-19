@@ -5,7 +5,7 @@
         <div class="largeBox"></div>
         <div class="smallBox"></div>
       </div>
-      <h1>Loading</h1>
+      <h1>{{loadingText}}</h1>
     </div>
     <nav v-if="$route.path != '/'" class="app__nav">
       <h1 @click="searchHome" class="nav__header">Hyphen-Hacks Dashboard</h1>
@@ -103,6 +103,13 @@
       }
     },
     computed: {
+      loadingText() {
+        if (this.$route.path == '/stats') {
+          return 'crunching the numbers'
+        } else {
+          return 'loading'
+        }
+      },
       sortedList() {
         if (!this.invert) {
           if (this.sortOption == 'name') {

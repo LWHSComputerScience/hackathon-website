@@ -123,6 +123,11 @@
           options: {
             maintainAspectRatio: true,
             animation: 0,
+            elements: {
+              point:{
+                radius: 0
+              }
+            },
             scales: {
               xAxes: [{
                 type: 'time',
