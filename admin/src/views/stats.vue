@@ -56,7 +56,82 @@
     },
     mounted() {
       //this.$parent.loading = true
+      let chart;
+      let checkins = document.getElementById('checkins').getContext('2d');
 
+      chart = new Chart(checkins, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+
+          datasets: [{
+            label: "Check-ins",
+            backgroundColor: 'rgb(255, 99, 132, 0)',
+            borderColor: '#e74c3c',
+            data: [],
+            lineTension: this.lineTension,
+          },
+            {
+              label: "People On Campus",
+              backgroundColor: 'rgb(255, 99, 132, 0)',
+              borderColor: '#3498db',
+              data: [],
+              lineTension: this.lineTension,
+            },
+            {
+              label: "Waivers Completed",
+              backgroundColor: 'rgb(255, 99, 132, 0)',
+              borderColor: '#2ecc71',
+              data: [],
+              lineTension: this.lineTension,
+            },
+            {
+              label: "Attendees (different scale)",
+              backgroundColor: 'rgb(255, 99, 132, 0)',
+              borderColor: '#9b59b6',
+              data: [],
+              lineTension: this.lineTension,
+              yAxisID: 'y2'
+            },
+            {
+              label: "Volunteers",
+              backgroundColor: 'rgb(255, 99, 132, 0)',
+              borderColor: '#e67e22',
+              data: [],
+              lineTension: this.lineTension,
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+          maintainAspectRatio: true,
+          animation: false,
+          scales: {
+            xAxes: [{
+              type: 'time',
+              time: {
+                unit: 'minute'
+              }
+            }
+            ],
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            },
+              {
+                id: 'y2',
+                display: false,
+                ticks: {
+                  beginAtZero: true
+
+                }
+              }]
+          }
+        }
+      });
       firebase.database().ref('attendeeDB/analyticsLog').on('value', (snapshot) => {
         let currentAnalytics = this.$parent.analytics
         this.percentCheckedIn = Math.round((currentAnalytics.checkedIn / currentAnalytics.attendees) * 100)
@@ -86,7 +161,7 @@
             t: log.time
           })
           this.voulunteers.push({
-            y: log.data.voulunteers,
+            y: log.data.volunteers,
             t: log.time
           })
           if (this.lowestTimeStamp) {
@@ -106,80 +181,12 @@
 
         }
         console.log(this.log)
-        let checkins = document.getElementById('checkins').getContext('2d');
-        let chart = new Chart(checkins, {
-          // The type of chart we want to create
-          type: 'line',
-
-          // The data for our dataset
-          data: {
-
-            datasets: [{
-              label: "Check-ins",
-              backgroundColor: 'rgb(255, 99, 132, 0)',
-              borderColor: '#e74c3c',
-              data: this.checkinsOverTime,
-              lineTension: this.lineTension,
-            },
-              {
-                label: "People On Campus",
-                backgroundColor: 'rgb(255, 99, 132, 0)',
-                borderColor: '#3498db',
-                data: this.peopleOnCampus,
-                lineTension: this.lineTension,
-              },
-              {
-                label: "Waivers Completed",
-                backgroundColor: 'rgb(255, 99, 132, 0)',
-                borderColor: '#2ecc71',
-                data: this.waiversCompleted,
-                lineTension: this.lineTension,
-              },
-              {
-                label: "Attendees (different scale)",
-                backgroundColor: 'rgb(255, 99, 132, 0)',
-                borderColor: '#9b59b6',
-                data: this.attendees,
-                lineTension: this.lineTension,
-                yAxisID: 'y2'
-              },
-              {
-                label: "Volunteers",
-                backgroundColor: 'rgb(255, 99, 132, 0)',
-                borderColor: '#e67e22',
-                data: this.voulunteers,
-                lineTension: this.lineTension,
-              }]
-          },
-
-          // Configuration options go here
-          options: {
-            maintainAspectRatio: true,
-            animation: false,
-            scales: {
-              xAxes: [{
-                type: 'time',
-                time: {
-                  unit: 'minute'
-                }
-              }
-                ],
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true
-                }
-              },
-                {
-                  id: 'y2',
-                  display: false,
-                  ticks: {
-                    beginAtZero: true
-
-                  }
-                }]
-            }
-          }
-        });
+        chart.data.datasets[0].data = this.checkinsOverTime
+        chart.data.datasets[1].data = this.peopleOnCampus
+        chart.data.datasets[2].data = this.waiversCompleted
+        chart.data.datasets[3].data = this.attendees
+        chart.data.datasets[4].data = this.voulunteers
+        chart.update()
         //  this.$parent.loading = false
       })
 

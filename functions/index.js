@@ -62,7 +62,6 @@ exports.analytics = functions.database.ref('/attendeeDB/people/').onWrite((snap,
         if (person.waiverComplete) {
           analytics.waiverComplete++
         }
-
       }
     }
     db.ref('attendeeDB/analytics').set(analytics)
