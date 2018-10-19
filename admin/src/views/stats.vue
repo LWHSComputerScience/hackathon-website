@@ -5,15 +5,15 @@
 
     <div class="stat__block">
       <div class="stat">
-        <b>{{percentCheckedIn}}%</b>
+        <b><span>{{percentCheckedIn}}</span>%</b>
         <p>of registrants checked in</p>
       </div>
       <div class="stat">
-        <b>{{percentWaivers}}%</b>
+        <b><span>{{percentWaivers}}</span>%</b>
         <p>of waivers completed</p>
       </div>
       <div class="stat">
-        <b>{{percentOnCampus}}%</b>
+        <b><span>{{percentOnCampus}}</span>%</b>
         <p>of checked in attendees on campus</p>
       </div>
 
@@ -22,6 +22,7 @@
     <div class="chart__container">
 
       <canvas class="chart" id="checkins"></canvas>
+      <small>This chart is not updated in real time, reload to get latest data.</small>
     </div>
 
   </div>
@@ -48,146 +49,163 @@
         voulunteers: [],
         lowestTimeStamp: false,
         maxTimeStamp: false,
-        percentCheckedIn: '',
-        percentWaivers: '',
-        percentOnCampus: '',
         lineTension: 0
       }
     },
+    computed: {
+      percentCheckedIn() {
+        let currentAnalytics = this.$parent.analytics
+        return Math.round((currentAnalytics.checkedIn / currentAnalytics.attendees) * 100)
+      },
+      percentWaivers() {
+        let currentAnalytics = this.$parent.analytics
+        return Math.round((currentAnalytics.waiverComplete / currentAnalytics.attendees) * 100)
+      },
+      percentOnCampus() {
+        let currentAnalytics = this.$parent.analytics
+        return Math.round((currentAnalytics.onCampus / currentAnalytics.attendees) * 100)
+      },
+    },
     mounted() {
+      this.$parent.loading = true
       //this.$parent.loading = true
-      let chart;
-      let checkins = document.getElementById('checkins').getContext('2d');
+      fetch('https://us-central1-hyphenhacks-dc851.cloudfunctions.net/updateAnalytics').then(res => {
+       // console.log('requested new analytics', res)
+        let checkins = document.getElementById('checkins').getContext('2d');
 
-      chart = new Chart(checkins, {
-        // The type of chart we want to create
-        type: 'line',
+        let chart = new Chart(checkins, {
+          // The type of chart we want to create
+          type: 'line',
 
-        // The data for our dataset
-        data: {
-
-          datasets: [{
-            label: "Check-ins",
-            backgroundColor: 'rgb(255, 99, 132, 0)',
-            borderColor: '#e74c3c',
-            data: [],
-            lineTension: this.lineTension,
-          },
-            {
-              label: "People On Campus",
-              backgroundColor: 'rgb(255, 99, 132, 0)',
-              borderColor: '#3498db',
+          // The data for our dataset
+          data: {
+            datasets: [{
+              label: "Check-ins",
+              borderColor: '#e74c3c',
+              backgroundColor: '#e74c3c',
               data: [],
-              lineTension: this.lineTension,
-            },
-            {
-              label: "Waivers Completed",
-              backgroundColor: 'rgb(255, 99, 132, 0)',
-              borderColor: '#2ecc71',
-              data: [],
-              lineTension: this.lineTension,
-            },
-            {
-              label: "Attendees (different scale)",
-              backgroundColor: 'rgb(255, 99, 132, 0)',
-              borderColor: '#9b59b6',
-              data: [],
-              lineTension: this.lineTension,
-              yAxisID: 'y2'
-            },
-            {
-              label: "Volunteers",
-              backgroundColor: 'rgb(255, 99, 132, 0)',
-              borderColor: '#e67e22',
-              data: [],
-              lineTension: this.lineTension,
-            }]
-        },
-
-        // Configuration options go here
-        options: {
-          maintainAspectRatio: true,
-          animation: false,
-          scales: {
-            xAxes: [{
-              type: 'time',
-              time: {
-                unit: 'minute'
-              }
-            }
-            ],
-            yAxes: [{
-              ticks: {
-                beginAtZero: true
-              }
+              lineTension: [],
+              fill: false,
+              stepped: true
             },
               {
-                id: 'y2',
-                display: false,
+                label: "People On Campus",
+                backgroundColor: 'rgb(255, 99, 132, 0)',
+                borderColor: '#3498db',
+                data: [],
+                lineTension: this.lineTension,
+              },
+              {
+                label: "Waivers Completed",
+                backgroundColor: 'rgb(255, 99, 132, 0)',
+                borderColor: '#2ecc71',
+                data: [],
+                lineTension: this.lineTension,
+              },
+              {
+                label: "Attendees (different scale)",
+                backgroundColor: 'rgb(255, 99, 132, 0)',
+                borderColor: '#9b59b6',
+                data: [],
+                lineTension: this.lineTension,
+                yAxisID: 'y2'
+              },
+              {
+                label: "Volunteers",
+                backgroundColor: 'rgb(255, 99, 132, 0)',
+                borderColor: '#e67e22',
+                data: [],
+                lineTension: this.lineTension,
+              }]
+          },
+
+          // Configuration options go here
+          options: {
+            maintainAspectRatio: true,
+            animation: 0,
+            scales: {
+              xAxes: [{
+                type: 'time',
+                time: {
+                  unit: 'minute'
+                }
+              }
+              ],
+              yAxes: [{
                 ticks: {
                   beginAtZero: true
-
                 }
-              }]
+              },
+                {
+                  id: 'y2',
+                  display: false,
+                  ticks: {
+                    beginAtZero: true
+
+                  }
+                }]
+            }
           }
-        }
-      });
-      firebase.database().ref('attendeeDB/analyticsLog').on('value', (snapshot) => {
-        let currentAnalytics = this.$parent.analytics
-        this.percentCheckedIn = Math.round((currentAnalytics.checkedIn / currentAnalytics.attendees) * 100)
-        this.percentWaivers = Math.round((currentAnalytics.waiverComplete / currentAnalytics.attendees) * 100)
-        this.percentOnCampus = Math.round((currentAnalytics.onCampus / currentAnalytics.attendees) * 100)
-        console.log('stats loaded')
-        this.log = snapshot.val();
+        });
 
-        console.log(snapshot.val())
-        for (let key in this.log) {
-          let log = this.log[key]
+        firebase.database().ref('attendeeDB/analyticsLog').once('value').then((snapshot) => {
+          this.$parent.loading = true
+          console.log('stats loaded')
+          this.log = snapshot.val();
 
-          this.checkinsOverTime.push({
-            y: log.data.checkedIn,
-            t: log.time
-          })
-          this.peopleOnCampus.push({
-            y: log.data.onCampus,
-            t: log.time
-          })
-          this.waiversCompleted.push({
-            y: log.data.waiverComplete,
-            t: log.time
-          })
-          this.attendees.push({
-            y: log.data.attendees,
-            t: log.time
-          })
-          this.voulunteers.push({
-            y: log.data.volunteers,
-            t: log.time
-          })
-          if (this.lowestTimeStamp) {
-            if (this.lowestTimeStamp > log.time) {
+          //console.log(snapshot.val())
+          for (let key in this.log) {
+            let log = this.log[key]
+
+            this.checkinsOverTime.push({
+              y: log.data.checkedIn,
+              t: log.time
+            })
+            this.peopleOnCampus.push({
+              y: log.data.onCampus,
+              t: log.time
+            })
+            this.waiversCompleted.push({
+              y: log.data.waiverComplete,
+              t: log.time
+            })
+            this.attendees.push({
+              y: log.data.attendees,
+              t: log.time
+            })
+            this.voulunteers.push({
+              y: log.data.volunteers,
+              t: log.time
+            })
+            if (this.lowestTimeStamp) {
+              if (this.lowestTimeStamp > log.time) {
+                this.lowestTimeStamp = log.time
+              }
+            } else {
               this.lowestTimeStamp = log.time
             }
-          } else {
-            this.lowestTimeStamp = log.time
-          }
-          if (this.maxTimeStamp) {
-            if (this.maxTimeStamp < log.time) {
+            if (this.maxTimeStamp) {
+              if (this.maxTimeStamp < log.time) {
+                this.maxTimeStamp = log.time
+              }
+            } else {
               this.maxTimeStamp = log.time
             }
-          } else {
-            this.maxTimeStamp = log.time
-          }
 
-        }
-        console.log(this.log)
-        chart.data.datasets[0].data = this.checkinsOverTime
-        chart.data.datasets[1].data = this.peopleOnCampus
-        chart.data.datasets[2].data = this.waiversCompleted
-        chart.data.datasets[3].data = this.attendees
-        chart.data.datasets[4].data = this.voulunteers
-        chart.update()
-        //  this.$parent.loading = false
+          }
+          // console.log(chart.data.datasets)
+          chart.data.datasets[0].data = this.checkinsOverTime;
+          chart.data.datasets[1].data = this.peopleOnCampus;
+          chart.data.datasets[2].data = this.waiversCompleted;
+          chart.data.datasets[3].data = this.attendees;
+          chart.data.datasets[4].data = this.voulunteers;
+
+          // console.log(chart.data.datasets)
+          chart.update()
+          this.$parent.loading = false
+          //  this.$parent.loading = false
+        })
+
       })
 
 

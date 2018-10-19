@@ -215,17 +215,42 @@
         this.totalList = {}
 
         this.totalList = data.val()
-        this.loading = false;
+        let analytics = {
+          checkedIn: 0,
+          people: 0,
+          attendees: 0,
+          volunteers: 0,
+          onCampus: 0,
+          waiverComplete: 0
+        }
+        if (data.val()) {
+          for (let key in data.val()) {
+            let person = data.val()[key]
+            analytics.people++
+            if (person.checkedIn) {
+              analytics.checkedIn++
+            }
+            if (person.role === 'volunteer') {
+              analytics.volunteers++
+            } else if (person.role === 'attendee') {
+              analytics.attendees++
+            }
+            if (person.onCampus) {
+              analytics.onCampus++
+            }
+            if (person.waiverComplete) {
+              analytics.waiverComplete++
+            }
+          }
+        }
+        this.analytics = analytics;
+        if (this.$route.path != '/stats') {
+          this.loading = false;
+        }
+
 
       })
-      firebase.database().ref('/attendeeDB/analytics/').on('value', (data) => {
-        //console.log(data.val())
-        console.log(' db load')
-        this.analytics = {}
 
-        this.analytics = data.val()
-
-      })
       firebase.database().ref('adminVersion').on('value', (data) => {
         //console.log(data.val())
         console.log('newest version', data.val())

@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 const functions = require('firebase-functions');
 const SlackBot = require('slackbots');
+const cors = require('cors')({origin: true});
 let bot = new SlackBot({
   token: 'xoxb-449331460291-451824055221-1sp5BeSxnYlndFzCgEUTHAQy', // Add a bot https://my.slack.com/services/new/bot and put the token
   name: 'Hyphen-Hacks-Team'
@@ -30,7 +31,7 @@ exports.addToWhitelist = functions.auth.user().onCreate((user) => {
 
 });
 
-
+*/
 exports.analytics = functions.database.ref('/attendeeDB/people/').onWrite((snap, context) => {
 
 
@@ -65,10 +66,6 @@ exports.analytics = functions.database.ref('/attendeeDB/people/').onWrite((snap,
       }
     }
     db.ref('attendeeDB/analytics').set(analytics)
-    db.ref('attendeeDB/analyticsLog').push().set({
-      time: Date.now(),
-      data: analytics
-    })
     console.log('updated analytics', analytics)
   })
 
@@ -76,47 +73,49 @@ exports.analytics = functions.database.ref('/attendeeDB/people/').onWrite((snap,
 
 
 })
-*/
+
 exports.updateAnalytics = functions.https.onRequest((req, res) => {
-  db.ref('/attendeeDB/people/').once('value').then(dataSnap => {
-    const data = dataSnap.val()
-    let analytics = {
-      checkedIn: 0,
-      people: 0,
-      attendees: 0,
-      volunteers: 0,
-      onCampus: 0,
-      waiverComplete: 0
-    }
-    if (data) {
-      for (var key in data) {
-        let person = data[key]
-        analytics.people++
-        if (person.checkedIn) {
-          analytics.checkedIn++
-        }
-        if (person.role === 'volunteer') {
-          analytics.volunteers++
-        } else if (person.role === 'attendee') {
-          analytics.attendees++
-        }
-        if (person.onCampus) {
-          analytics.onCampus++
-        }
-        if (person.waiverComplete) {
-          analytics.waiverComplete++
+  return cors(req, res, () => {
+    db.ref('/attendeeDB/people/').once('value').then(dataSnap => {
+      const data = dataSnap.val()
+      let analytics = {
+        checkedIn: 0,
+        people: 0,
+        attendees: 0,
+        volunteers: 0,
+        onCampus: 0,
+        waiverComplete: 0
+      }
+      if (data) {
+        for (var key in data) {
+          let person = data[key]
+          analytics.people++
+          if (person.checkedIn) {
+            analytics.checkedIn++
+          }
+          if (person.role === 'volunteer') {
+            analytics.volunteers++
+          } else if (person.role === 'attendee') {
+            analytics.attendees++
+          }
+          if (person.onCampus) {
+            analytics.onCampus++
+          }
+          if (person.waiverComplete) {
+            analytics.waiverComplete++
+          }
         }
       }
-    }
-    db.ref('attendeeDB/analytics').set(analytics)
-    db.ref('attendeeDB/analyticsLog').push().set({
-      time: Date.now(),
-      data: analytics
-    })
-    console.log('updated analytics', analytics)
+      db.ref('attendeeDB/analytics').set(analytics)
+      db.ref('attendeeDB/analyticsLog').push().set({
+        time: Date.now(),
+        data: analytics
+      })
+      console.log('updated analytics', analytics)
 
-    console.log('ending');
-    res.status(200).end();
+      console.log('ending');
+      res.status(200).end();
+    })
   })
 });
 exports.sendMessage = functions.database.ref('/notificationLog/{messageId}/')

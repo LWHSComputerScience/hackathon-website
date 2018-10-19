@@ -9,7 +9,14 @@
     border-radius: $rounding;
     margin-top: 2%;
     padding: 2%;
-
+    text-align: center;
+    canvas {
+      margin-bottom: 2%;
+    }
+    small {
+      text-align: center;
+      font-size: 0.8rem;
+    }
 
   }
   .stat__block {
@@ -29,13 +36,19 @@
     align-items: center;
     flex-direction: column;
     b {
-      font-size: 4rem;
+      font-size: 3rem;
+      font-weight: 600;
+      span {
+        font-size: 4rem;
+        color: $checked;
+      }
     }
     p {
       margin-top: 1%;
     }
   }
 }
+
 .stats__heading {
   font-size: 2.5rem;
   font-weight: bold;
@@ -43,6 +56,7 @@
   margin: 2%;
 
 }
+
 .chart__heading {
   font-weight: 600;
   text-align: center;
