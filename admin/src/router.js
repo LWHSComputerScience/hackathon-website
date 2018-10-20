@@ -86,6 +86,7 @@ router.beforeEach((to, from, next) =>{
 
 });
 if (process.env.NODE_ENV === 'production') {
+  console.log('setting up analytics')
   Vue.use(VueAnalytics, {
     // [Required] The name of your app as specified in Google Analytics.
     appName: 'Hyphen-Hacks Dashboard',
@@ -94,7 +95,8 @@ if (process.env.NODE_ENV === 'production') {
     // [Required] Your Google Analytics tracking ID.
     trackingId: 'UA-127808947-1',
     // If you're using vue-router, pass the router instance here.
-    vueRouter: router
+    vueRouter: router,
+    trackPage: true
   })
 }
 

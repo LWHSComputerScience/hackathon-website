@@ -1,6 +1,6 @@
 <template>
   <div @keydown="focusSearch" id="app">
-    <div v-if="loading"  id="loading">
+    <div v-if="loading" id="loading">
       <div class="hollowLoader">
         <div class="largeBox"></div>
         <div class="smallBox"></div>
@@ -42,15 +42,15 @@
       </div>
       <div v-if="version >= newestVersion" class="nav__analytics">
         <div class="analytics__row">
-          <b>{{analytics.checkedIn}}</b>
+          <b>{{analyticsFilter.checkedIn}}</b>
           <p>Checked In</p>
         </div>
         <div class="analytics__row">
-          <b>{{analytics.onCampus}}</b>
+          <b>{{analyticsFilter.onCampus}}</b>
           <p>On Campus</p>
         </div>
         <div class="analytics__row">
-          <b>{{analytics.waiverComplete}}</b>
+          <b>{{analyticsFilter.waiverComplete}}</b>
           <p>Waivers Complete</p>
         </div>
         <div class="analytics__row">
@@ -103,6 +103,66 @@
       }
     },
     computed: {
+      analyticsFilter() {
+
+        if (this.includeVoulenteers && this.includeAttendees) {
+          console.log('Showing everything')
+          return this.analytics
+        } else if (this.includeAttendees === true) {
+          let analytics = {
+            checkedIn: 0,
+            people: 0,
+            attendees: 0,
+            volunteers: 0,
+            onCampus: 0,
+            waiverComplete: 0
+          }
+          console.log('Showing attendees')
+          let data = this.totalList
+          for (let key in data) {
+            let person = data[key]
+            if (person.role === 'attendee') {
+              if (person.checkedIn) {
+                analytics.checkedIn++
+              }
+              if (person.onCampus) {
+                analytics.onCampus++
+              }
+              if (person.waiverComplete) {
+                analytics.waiverComplete++
+              }
+            }
+          }
+          return analytics
+        } else {
+          console.log('Showing voulunteers')
+          let analytics = {
+            checkedIn: 0,
+            people: 0,
+            attendees: 0,
+            volunteers: 0,
+            onCampus: 0,
+            waiverComplete: 0
+          }
+
+          let data = this.totalList
+          for (let key in data) {
+            let person = data[key]
+            if (person.role === 'volunteer') {
+              if (person.checkedIn) {
+                analytics.checkedIn++
+              }
+              if (person.onCampus) {
+                analytics.onCampus++
+              }
+              if (person.waiverComplete) {
+                analytics.waiverComplete++
+              }
+            }
+          }
+          return analytics
+        }
+      },
       loadingText() {
         if (this.$route.path == '/stats') {
           return 'crunching the numbers'
