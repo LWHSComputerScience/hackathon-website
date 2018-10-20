@@ -7,6 +7,7 @@ import Add from './views/add.vue'
 import Stats from './views/stats.vue'
 import notification from './views/notification.vue'
 import firebase from 'firebase/app'
+import VueAnalytics from 'vue-ua'
 import 'firebase/auth'
 import 'firebase/database'
 let whitelist = {};
@@ -84,4 +85,17 @@ router.beforeEach((to, from, next) =>{
   });
 
 });
+if (process.env.NODE_ENV === 'production') {
+  Vue.use(VueAnalytics, {
+    // [Required] The name of your app as specified in Google Analytics.
+    appName: 'Hyphen-Hacks Dashboard',
+    // [Required] The version of your app.
+    appVersion: require('../package.json').version,
+    // [Required] Your Google Analytics tracking ID.
+    trackingId: 'UA-127808947-1',
+    // If you're using vue-router, pass the router instance here.
+    vueRouter: router
+  })
+}
+
 export default router;
