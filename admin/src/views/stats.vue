@@ -82,11 +82,11 @@
             datasets: [{
               label: "Check-ins",
               borderColor: '#e74c3c',
-              backgroundColor: '#e74c3c',
+              backgroundColor: '#fff',
               data: [],
               lineTension: [],
-              fill: false,
-              stepped: true
+              fill: false
+
             },
               {
                 label: "People On Campus",
@@ -94,6 +94,8 @@
                 borderColor: '#3498db',
                 data: [],
                 lineTension: this.lineTension,
+                backgroundColor: '#fff',
+                fill: false
               },
               {
                 label: "Waivers Completed",
@@ -101,6 +103,8 @@
                 borderColor: '#2ecc71',
                 data: [],
                 lineTension: this.lineTension,
+                backgroundColor: '#fff',
+                fill: false
               },
               {
                 label: "Attendees (different scale)",
@@ -108,7 +112,9 @@
                 borderColor: '#9b59b6',
                 data: [],
                 lineTension: this.lineTension,
-                yAxisID: 'y2'
+                backgroundColor: '#fff',
+                yAxisID: 'y2',
+                fill: false
               },
               {
                 label: "Volunteers",
@@ -116,6 +122,8 @@
                 borderColor: '#e67e22',
                 data: [],
                 lineTension: this.lineTension,
+                backgroundColor: '#fff',
+                fill: false
               }]
           },
 
